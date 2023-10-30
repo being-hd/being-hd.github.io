@@ -61,9 +61,9 @@ body, html {
 
 
 .profile-image {
-    width: 80%; /* Adjust size as needed */
-    border-radius: 25%; /* To create a circular outline */
-    overflow: hidden; /* Hides any image overflow */
+    width: 60%; /* Adjust size as needed */
+    border-radius: 50%; /* To create a circular outline */
+    overflow: auto; /* Hides any image overflow */
     margin: 10px 0; /* Adjust margin as necessary */
 }
 
@@ -167,8 +167,8 @@ body, html {
 }
 
 .home h1 {
-    /* margin: 40px 300px 0 350px; */
-    margin: 5% 20% 0 30%;
+    margin: 5% 5% 0 30%;
+    text-align: center;
     color: white;
     text-decoration: none;
 }
