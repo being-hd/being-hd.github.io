@@ -17,6 +17,7 @@ body, html {
     background-color: rgba(252, 197, 147, 0.822);
     display: flex;
     overflow-x: auto;
+    overflow-y: auto;
     flex-direction: column;
     justify-content: flex-start; /* Align items at the start (top) of the container */
     align-items: center;
@@ -51,18 +52,21 @@ body, html {
 
 .social-links {
     position: absolute;
-    bottom: 10px; /* Adjust as needed */
+    left: 3%;
+    right: 7%;
+    bottom: 1%; /* Adjust as needed */
 }
 
 .social-links a {
     text-decoration: none;
-    margin: 10px;
+    justify-content: center;
+    margin: 1%;
 }
 
 
 .profile-image {
     width: 80%; /* Adjust size as needed */
-    border-radius: 50%; /* To create a circular outline */
+    border-radius: 5%; /* To create a circular outline */
     overflow: hidden; /* Hides any image overflow */
     margin: 10px 0; /* Adjust margin as necessary */
 }
@@ -113,8 +117,12 @@ body, html {
 
 .teaching ul li {
     margin-left: 2px;
-    font-size: normal;
+    /* font-size: normal; */
     color:white;
+}
+
+.teaching li a {
+    color: rgba(252, 197, 147, 0.822);
 }
 
 .research {
@@ -167,8 +175,9 @@ body, html {
 }
 
 .home h1 {
-    margin: 5% 5% 0 30%;
+    margin: 5% 30% 0 30%;
     text-align: center;
+    justify-content: center;
     color: white;
     text-decoration: none;
 }
