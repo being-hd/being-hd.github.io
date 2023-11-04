@@ -238,3 +238,7 @@ body, html {
 .interests ol a {
     color: rgba(252, 197, 147, 0.822);
 }
+
+.interests img {
+    padding: 5px;
+}
