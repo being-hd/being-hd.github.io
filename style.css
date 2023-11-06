@@ -36,15 +36,15 @@ body, html {
 .main-links {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items at the start (top) of the container */
+    justify-content: center; /* Align items at the start (top) of the container */
     align-items: center;
-    padding: 70px;
+    padding: inherit;
 
 }
 .main-links a {
     text-decoration: none;
     color: black;
-    margin: 10px 0;
+    margin: 10% 0;
     font-family:sans-serif;
     font-weight: 600;
     font-size: large;
@@ -241,4 +241,22 @@ body, html {
 
 .interests img {
     padding: 5px;
+}
+
+.tips {
+    background-color: rgb(54, 69, 79);
+    font-family:sans-serif;
+    padding-left: 5px;
+    padding-right: 20px;
+}
+
+.tips h1 {
+    /* margin: 5% 20% 0 40%; */
+    color: white;
+    text-decoration: none;
+}
+
+.tips h3 {
+    text-align: justify; /* Justify the text within the ul */
+    color: rgba(252, 197, 147, 0.822);
 }
