@@ -52,8 +52,8 @@ body, html {
 
 .social-links {
     position: absolute;
-    left: 3%;
-    right: 7%;
+    left: 0.5%;
+    right: 4%;
     bottom: 1%; /* Adjust as needed */
 }
 
@@ -63,13 +63,14 @@ body, html {
     margin: 1%;
 }
 
-
 .profile-image {
-    width: 80%; /* Adjust size as needed */
-    border-radius: 5%; /* To create a circular outline */
+    width: 125px; /* Set a fixed width */
+    height: 125px; /* Set a fixed height equal to width */
+    border-radius: 50%; /* This creates a circular shape */
     overflow: hidden; /* Hides any image overflow */
     margin: 10px 0; /* Adjust margin as necessary */
 }
+
 
 .profile-image img {
     width: 100%;
