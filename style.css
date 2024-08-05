@@ -1,76 +1,73 @@
 body, html {
-    margin: 0 auto auto auto;
+    margin: 0;
     padding: 0;
     height: 100%;
     background-color: rgb(54, 69, 79); /* Set a background color */
     color: white;
+    overflow: hidden; /* Prevents scrolling of the body */
 }
 
 .container {
-    overflow: auto;
     display: flex;
     height: 100vh;
 }
 
 .left-side {
+    position: fixed; /* Fixes the left side content */
     width: 18%;
+    height: 100vh; /* Ensures it takes the full height of the viewport */
     background-color: rgba(252, 197, 147, 0.822);
     display: flex;
-    overflow-x: auto;
-    overflow-y: auto;
     flex-direction: column;
-    justify-content: flex-start; /* Align items at the start (top) of the container */
     align-items: center;
-    padding: 20px 0; /* Adjust padding as needed */
-
+    padding: 20px 0;
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
 }
 
 .right-side {
-    flex: 1;
+    margin-left: 18%; /* Pushes the right side content to the right */
+    width: 82%;
     background-color: rgb(54, 69, 79);
-    display: flex;
-    overflow-y: auto;
+    overflow-y: auto; /* Allows vertical scrolling */
     padding: 15px;
+    box-sizing: border-box;
 }
 
 .main-links {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Align items at the start (top) of the container */
     align-items: center;
     padding: inherit;
-
 }
+
 .main-links a {
     text-decoration: none;
     color: black;
     margin: 10% 0;
-    font-family:sans-serif;
+    font-family: sans-serif;
     font-weight: 600;
     font-size: large;
 }
 
 .social-links {
-    position: absolute;
-    left: 0.5%;
-    right: 4%;
-    bottom: 1%; /* Adjust as needed */
+    margin-top: auto; /* Pushes social links to the bottom */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .social-links a {
     text-decoration: none;
-    justify-content: center;
-    margin: 1%;
+    margin: 0 8px; /* Adds space between social links */
 }
 
 .profile-image {
-    width: 125px; /* Set a fixed width */
-    height: 125px; /* Set a fixed height equal to width */
-    border-radius: 50%; /* This creates a circular shape */
-    overflow: hidden; /* Hides any image overflow */
-    margin: 10px 0; /* Adjust margin as necessary */
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px 0;
 }
-
 
 .profile-image img {
     width: 100%;
@@ -78,186 +75,50 @@ body, html {
     object-fit: cover;
 }
 
-.projects {
+/* Additional styles for different sections */
+.projects, .teaching, .research, .home, .interests, .tips {
     background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-    padding-right: 35px;
+    font-family: sans-serif;
+    padding: 10px 20px;
 }
 
-.projects h1 {
-    /* margin: 40px 300px 0 350px; */
-    margin: 5% 20% 0 30%;
+.projects h1, .teaching h1, .research h1, .home h1, .interests h1, .tips h1 {
     color: white;
+    text-decoration: underline;
+    white-space: nowrap; /* Prevents the text from wrapping */
+    overflow: hidden; /* Hides overflowed text */
+    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
+    text-align: center; /* Center-aligns the text */
+}
+
+.projects h3, .teaching h3, .research h3, .home h3, .interests h3, .tips h3 {
+    text-align: justify;
+    margin-left: -2%;
+    color: rgba(252, 197, 147, 0.822);
     text-decoration: underline;
 }
 
-.projects ul a {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.projects ul li {
-    font-size: normal;
-    color:white;
-}
-
-.teaching {
-    background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-}
-
-.teaching h1 {
-    /* margin: 40px 300px 0 350px; */
-    margin: 5% 20% 0 30%;
-    color: white;
-    text-decoration: underline;
-}
-
-.teaching h3 {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.teaching ul li {
-    margin-left: 2px;
-    /* font-size: normal; */
-    color:white;
-}
-
-.teaching li a {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.research {
-    background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-    padding-left: 10px;
-    padding-right: 20px;
-}
-
-.research h1 {
-    /* margin: 40px 300px 0 350px; */
-    margin: 5% 20% 0 30%;
-    color: white;
-    text-decoration: underline;
-}
-
-.research h3 {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.research ul {
-    text-align: justify; /* Justify the text within the ul */
-}
-
-.research ul li {
-    margin-left: 2px;
-    font-size: normal;
-    color:white;
-    padding: 5px 0;
-}
-
-.research ol {
-    text-align: justify; /* Justify the text within the ol */
-    padding-left: 20px; /* Indent ordered list items */
-}
-
-.research ol li {
-    padding: 2px 0; /* Add padding for better readability */
-}
-
-.research ol a {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.home {
-    background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-    padding-left: 10px;
-    padding-right: 20px;
-}
-
-.home h1 {
-    margin: 5% 30% 0 30%;
-    text-align: center;
-    justify-content: center;
-    color: white;
-    text-decoration: none;
-}
-
-.home h3 {
-    text-align: justify; /* Justify the text within the ul */
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.home ul li{
-    text-align: justify; /* Justify the text within the ul */
+.home ul li, .research ul li, .teaching ul li, .interests ul li {
+    text-align: justify;
     list-style: none;
     color: white;
 }
 
-.home ul a {
+.home ol li, .research ol li, .teaching ol li, .interests ol li {
+    margin-left: -20px;
+    text-align: justify;
+    color: white;
+}
+
+.home a, .research a, .teaching a, .interests a {
     color: rgba(252, 197, 147, 0.822);
     text-decoration: none;
 }
 
-.home ol li{
-    margin: 0 0 0 -40px;
-    text-align:justify; /* Justify the text within the ul */
-    color: white;
+.research ol, .teaching ol, .interests ol {
+    padding-left: 20px;
 }
 
-.interests {
-    background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-    padding-left: 5px;
-    padding-right: 20px;
-}
-
-.interests h1 {
-    /* margin: 40px 300px 0 400px; */
-    margin: 5% 20% 0 40%;
-    color: white;
-    text-decoration: none;
-}
-
-.interests h3 {
-    text-align: justify; /* Justify the text within the ul */
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.interests ul {
-    text-align: justify; /* Justify the text within the ul */
-    list-style: none;
-    color: white;
-}
-
-.interests ol li{
-    margin: 0 0 0 -22px;
-    text-align:justify; /* Justify the text within the ul */
-    color: white;
-}
-
-.interests ol a {
-    color: rgba(252, 197, 147, 0.822);
-}
-
-.interests img {
-    padding: 5px;
-}
-
-.tips {
-    background-color: rgb(54, 69, 79);
-    font-family:sans-serif;
-    padding-left: 5px;
-    padding-right: 20px;
-}
-
-.tips h1 {
-    /* margin: 5% 20% 0 40%; */
-    color: white;
-    text-decoration: none;
-}
-
-.tips h3 {
-    text-align: justify; /* Justify the text within the ul */
-    color: rgba(252, 197, 147, 0.822);
+.research ol li, .teaching ol li, .interests ol li {
+    padding: 2px 0;
 }
