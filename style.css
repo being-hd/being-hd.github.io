@@ -91,34 +91,56 @@ body, html {
     text-align: center; /* Center-aligns the text */
 }
 
-.projects h3, .teaching h3, .research h3, .home h3, .interests h3, .tips h3 {
+.projects h3, .teaching h3, .research h3, .home h3, .interests h3 {
     text-align: justify;
     margin-left: -2%;
     color: rgba(252, 197, 147, 0.822);
     text-decoration: underline;
 }
 
-.home ul li, .research ul li, .teaching ul li, .interests ul li {
+.home ul li, .research ul li, .teaching ul li, .interests ul li, .tips ul li {
     text-align: justify;
     list-style: none;
     color: white;
 }
 
-.home ol li, .research ol li, .teaching ol li, .interests ol li {
+.home ol li, .research ol li, .teaching ol li, .interests ol li, .tips ol li {
     margin-left: -20px;
     text-align: justify;
     color: white;
 }
 
-.home a, .research a, .teaching a, .interests a {
+.home a, .research a, .teaching a, .interests a, .tips a {
     color: rgba(252, 197, 147, 0.822);
     text-decoration: none;
 }
 
-.research ol, .teaching ol, .interests ol {
+.research ol, .teaching ol, .interests ol, .tips ol {
     padding-left: 20px;
 }
 
-.research ol li, .teaching ol li, .interests ol li {
+.research ol li, .teaching ol li, .interests ol li, .tips ol li {
     padding: 2px 0;
 }
+
+.tips p {
+    text-align: justify;
+}
+
+.tips h3 {
+    color:rgba(252, 197, 147, 0.822)
+}
+
+table {
+    margin: justify;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+  
