@@ -1,0 +1,11 @@
+Changes made in the website:
+
+Date: 30.09.2024
+
+1. Fixed indentation issues
+2. Removed redundant code in css file
+3. Redesigned homepage
+4. Social icons now only appear on homepage and not on all pages
+5. Updated teaching details
+6. Fixed other details iin style.css
+7. Updated media queries for mobile responsiveness
