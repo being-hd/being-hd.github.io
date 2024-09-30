@@ -60,7 +60,6 @@ body, html {
 
 .social-links {
     margin-top: auto; /* Pushes social links to the bottom */
-    display: flex;
     flex-direction: row;
     justify-content: center;
 }
@@ -125,19 +124,26 @@ body, html {
         padding-right: 20px;
         overflow-y: auto;
     }
+
+    .home table {
+        display: block; /* Forces the table to behave like a block element */
+        width: 100%; /* Ensures it takes full width */
+        overflow-x: auto;
+    }
 }
 
 
 
 /* Additional styles for different sections */
-.projects, .teaching, .research, .home, .interests, .tips {
+.home, .projects, .teaching, .research, .interests, .tips {
     background-color: rgb(54, 69, 79);
     font-family:system-ui;
-    /* padding: 10px 20px; */
-    padding: auto auto;
+    text-align: justify;
+    margin-left: 6px;
+    margin-right: 6px;
 }
 
-.projects h2, .teaching h2, .research h2, .home h2, .interests h2, .tips h2 {
+.home h2, .projects h2, .teaching h2, .research h2, .interests h2, .tips h2 {
     color: white;
     text-decoration: underline;
     white-space: nowrap; /* Prevents the text from wrapping */
@@ -146,9 +152,8 @@ body, html {
     text-align: center; /* Center-aligns the text */
 }
 
-.projects h3, .teaching h3, .research h3, .home h3, .interests h3 {
+.home h3, .projects h3, .teaching h3, .research h3, .interests h3 {
     text-align: justify;
-    margin-left: -2%;
     color: rgba(252, 197, 147, 0.822);
     text-decoration: underline;
 }
@@ -160,7 +165,7 @@ body, html {
 }
 
 .home ol li, .research ol li, .teaching ol li, .interests ol li, .tips ol li {
-    margin-left: -20px;
+    margin-right: 5px;
     text-align: justify;
     color: white;
 }
@@ -188,7 +193,7 @@ body, html {
 
 table {
     margin: justify;
-    font-family: arial, sans-serif;
+    font-family: system-ui;
     border-collapse: collapse;
     width: 100%;
     text-align: justify;
@@ -197,6 +202,10 @@ table {
   td, th {
     border: 1px solid #dddddd;
     text-align: center;
+    word-wrap: break-word;
     padding: 8px;
   }
-  
+
+  .highlight {
+    color: rgba(252, 197, 147, 0.822);
+}
