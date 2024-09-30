@@ -6,6 +6,8 @@ Date: 30.09.2024
 2. Removed redundant code in css file
 3. Redesigned homepage
 4. Social icons now only appear on homepage and not on all pages
-5. Updated teaching details
-6. Fixed other details iin style.css
-7. Updated media queries for mobile responsiveness
+5. Updated teaching details in teaching.html
+6. Fixed margin and padding inconsistencies in style.css
+7. Updated media queries in style.css for mobile responsiveness
+8. Fixed typos on homepage
+9. Updated some details in techtips.html
