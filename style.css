@@ -206,6 +206,10 @@ table {
     padding: 8px;
   }
 
+  .centering {
+    text-align: justify;
+  }
+  
   .highlight {
     color: rgba(252, 197, 147, 0.822);
 }
