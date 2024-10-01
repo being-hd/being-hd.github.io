@@ -1,5 +1,10 @@
 Changes made in the website:
 
+Date: 01.10.2024
+
+1. Fixed a bug in techtips.html
+2. Updated style.css
+
 Date: 30.09.2024
 
 1. Fixed indentation issues
