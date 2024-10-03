@@ -1,5 +1,10 @@
 Changes made in the website:
 
+Date: 03.10.2024
+
+1. Updated details in research.html
+2. Updated style.css
+
 Date: 02.10.2024
 
 1. Updated details in research.html
