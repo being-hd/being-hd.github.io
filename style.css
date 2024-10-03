@@ -158,7 +158,8 @@ body, html {
     text-decoration: underline;
 }
 
-.home ul li, .research ul li, .projects ul li, .teaching ul li, .interests ul li, .tips ul li {
+.home ul, .research ul, .projects ul, .teaching ul, .interests ul, .tips ul {
+    margin-left: -38px;
     text-align: justify;
     list-style: none;
     color: white;
