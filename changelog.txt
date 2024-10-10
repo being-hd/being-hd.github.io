@@ -1,5 +1,9 @@
 Changes made in the website:
 
+Date: 10.10.2024
+
+1. Updated techtips.html
+
 Date: 03.10.2024
 
 1. Updated details in research.html
