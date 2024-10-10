@@ -144,6 +144,7 @@ body, html {
 }
 
 .home h2, .projects h2, .teaching h2, .research h2, .interests h2, .tips h2 {
+    font-family: sans-serif;
     color: white;
     text-decoration: underline;
     white-space: nowrap; /* Prevents the text from wrapping */
