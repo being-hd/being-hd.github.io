@@ -3,6 +3,9 @@ Changes made in the website:
 Date: 10.10.2024
 
 1. Updated techtips.html
+2. Updated index.html
+3. Fixed a bug in style.css
+4. Updated research.html
 
 Date: 03.10.2024
 
