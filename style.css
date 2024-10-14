@@ -165,8 +165,13 @@ body, html {
     color: white;
 }
 
+.research ol, .teaching ol, .interests ol, .tips ol {
+    padding-left: 20px;
+}
+
 .home ol li, .research ol li, .teaching ol li, .interests ol li, .tips ol li {
     margin-right: 5px;
+    padding: 2px 0;
     text-align: justify;
     color: white;
 }
@@ -174,18 +179,6 @@ body, html {
 .home a, .research a, .teaching a, .projects a, .interests a, .tips a {
     color: rgba(252, 197, 147, 0.822);
     text-decoration: none;
-}
-
-.research ol, .teaching ol, .interests ol, .tips ol {
-    padding-left: 20px;
-}
-
-.research ol li, .teaching ol li, .interests ol li, .tips ol li {
-    padding: 2px 0;
-}
-
-.tips p {
-    text-align: justify;
 }
 
 .tips h3 {
