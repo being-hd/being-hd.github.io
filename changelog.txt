@@ -1,5 +1,10 @@
 Changes made in the website:
 
+Date: 14.10.2024
+
+1. Updated interests.html
+2. Updated style.css
+
 Date: 10.10.2024
 
 1. Updated techtips.html
