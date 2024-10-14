@@ -16,7 +16,7 @@ body, html {
 
 .left-side {
     position: fixed; /* Fixes the left side content */
-    width: 18%;
+    width: 13%;
     height: 100vh; /* Ensures it takes the full height of the viewport */
     height: -webkit-fill-available;
     background-color: rgba(252, 197, 147, 0.822);
@@ -30,11 +30,11 @@ body, html {
 }
 
 .right-side {
-    margin-left: 18%; /* Pushes the right side content to the right */
-    width: 82%;
+    margin-left: 14%; /* Pushes the right side content to the right */
+    width: 87%;
     background-color: rgb(54, 69, 79);
     overflow-y: auto; /* Allows vertical scrolling */
-    padding: 15px;
+    padding: 14px;
     box-sizing: border-box;
 }
 
@@ -206,4 +206,15 @@ table {
   
   .highlight {
     color: rgba(252, 197, 147, 0.822);
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(54, 69, 79); /* Same as your main background */
+    color: rgba(252, 197, 147, 0.822); /* Matches the accent color */
+    font-size: small;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
