@@ -1,5 +1,14 @@
 Changes made in the website:
 
+Date: 18.04.2025
+
+1. Updated homepage
+2. Changed font
+3. Updated details in reseaaarch.html
+4. Rewritten project.html completely
+5. Updated style.css
+6. Modified interests.html
+
 Date: 14.10.2024
 
 1. Updated interests.html
