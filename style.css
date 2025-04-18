@@ -6,7 +6,7 @@ body, html {
     padding: 0;
     height: 100%;
     height: -webkit-fill-available;
-    background-color: rgb(54, 69, 79); /* Set a background color */
+    background-color: rgb(78, 94, 88); /* Set a background color */
     color: white;
     /* overflow: hidden; Prevents scrolling of the body */
 }
@@ -22,7 +22,7 @@ body, html {
     width: 13%;
     height: 100vh; /* Ensures it takes the full height of the viewport */
     height: -webkit-fill-available;
-    background-color: rgba(252, 197, 147, 0.822);
+    background-color: rgba(255, 211, 150, 0.902);
     display: flex;
     overflow-x: auto;
     overflow-y: auto;
@@ -35,7 +35,7 @@ body, html {
 .right-side {
     margin-left: 14%; /* Pushes the right side content to the right */
     width: 87%;
-    background-color: rgb(54, 69, 79);
+    background-color: rgb(78, 94, 88);
     overflow-y: auto; /* Allows vertical scrolling */
     padding: 14px;
     box-sizing: border-box;
@@ -140,7 +140,7 @@ body, html {
 
 /* Additional styles for different sections */
 .home, .project, .teaching, .research, .interests, .tips {
-    background-color: rgb(54, 69, 79);
+    background-color: rgb(78, 94, 88);
     font-family: Spectral;
     text-align: justify;
     margin-left: 6px;
@@ -159,7 +159,7 @@ body, html {
 
 .home h3, .project h3, .teaching h3, .research h3, .interests h3 {
     text-align: justify;
-    color: rgba(252, 197, 147, 0.822);
+    color: rgba(255, 211, 150, 0.902);
     text-decoration: underline;
 }
 
@@ -181,12 +181,12 @@ body, html {
 }
 
 .home a, .research a, .teaching a, .project a, .interests a, .tips a {
-    color: rgba(252, 197, 147, 0.822);
+    color: rgba(255, 211, 150, 0.902);
     text-decoration: none;
 }
 
 .tips h3 {
-    color:rgba(252, 197, 147, 0.822)
+    color:rgba(255, 211, 150, 0.902)
 }
 
 table {
@@ -195,6 +195,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     text-align: justify;
+    caption-side: bottom;
   }
   
   td, th {
@@ -209,14 +210,14 @@ table {
   }
   
   .highlight {
-    color: rgba(252, 197, 147, 0.822);
+    color: rgba(255, 211, 150, 0.902);
 }
 
 .footer {
     text-align: center;
     padding: 10px;
     background-color: rgb(54, 69, 79); /* Same as your main background */
-    color: rgba(252, 197, 147, 0.822); /* Matches the accent color */
+    color: rgba(255, 211, 150, 0.902); /* Matches the accent color */
     font-size: small;
     position: fixed;
     bottom: 0;
