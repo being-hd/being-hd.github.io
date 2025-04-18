@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@200&display=swap');
+
+
 body, html {
     margin: auto auto auto auto;
     padding: 0;
@@ -49,7 +52,7 @@ body, html {
     text-decoration: none;
     color: black;
     margin: 10% 0;
-    font-family:system-ui;
+    font-family: Spectral;
     font-size: large;
     font-weight: normal; /* Default to normal */
 }
@@ -115,6 +118,7 @@ body, html {
 
     .main-links a {
         margin: 5px 10px;
+        font-family: Spectral;
         font-size: medium;
     }
 
@@ -135,16 +139,16 @@ body, html {
 
 
 /* Additional styles for different sections */
-.home, .projects, .teaching, .research, .interests, .tips {
+.home, .project, .teaching, .research, .interests, .tips {
     background-color: rgb(54, 69, 79);
-    font-family:system-ui;
+    font-family: Spectral;
     text-align: justify;
     margin-left: 6px;
     margin-right: 6px;
 }
 
-.home h2, .projects h2, .teaching h2, .research h2, .interests h2, .tips h2 {
-    font-family: sans-serif;
+.home h2, .project h2, .teaching h2, .research h2, .interests h2, .tips h2 {
+    font-family: Spectral;
     color: white;
     text-decoration: underline;
     white-space: nowrap; /* Prevents the text from wrapping */
@@ -153,30 +157,30 @@ body, html {
     text-align: center; /* Center-aligns the text */
 }
 
-.home h3, .projects h3, .teaching h3, .research h3, .interests h3 {
+.home h3, .project h3, .teaching h3, .research h3, .interests h3 {
     text-align: justify;
     color: rgba(252, 197, 147, 0.822);
     text-decoration: underline;
 }
 
-.home ul, .research ul, .projects ul, .teaching ul, .interests ul, .tips ul {
+.home ul, .research ul, .project ul, .teaching ul, .interests ul, .tips ul {
     text-align: justify;
     list-style: none;
     color: white;
 }
 
-.research ol, .teaching ol, .interests ol, .tips ol {
+.research ol, .teaching ol, .project ol, .interests ol, .tips ol {
     padding-left: 20px;
 }
 
-.home ol li, .research ol li, .teaching ol li, .interests ol li, .tips ol li {
+.home ol li, .research ol li, .project ol li, .teaching ol li, .interests ol li, .tips ol li {
     margin-right: 5px;
     padding: 2px 0;
     text-align: justify;
     color: white;
 }
 
-.home a, .research a, .teaching a, .projects a, .interests a, .tips a {
+.home a, .research a, .teaching a, .project a, .interests a, .tips a {
     color: rgba(252, 197, 147, 0.822);
     text-decoration: none;
 }
@@ -187,7 +191,7 @@ body, html {
 
 table {
     margin: justify;
-    font-family: system-ui;
+    font-family: Spectral;
     border-collapse: collapse;
     width: 100%;
     text-align: justify;
