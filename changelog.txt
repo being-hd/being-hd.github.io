@@ -1,5 +1,11 @@
 Changes made in the website:
 
+Date: 19.04.2025
+
+1. Optimized for mobile view
+2. First use of Javascript in the codebase
+3. The menu now appears within a hamburger on a mobile device.
+
 Date: 18.04.2025
 
 1. Updated homepage
