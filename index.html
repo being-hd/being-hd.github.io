@@ -1,100 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
-    <title>Welcome to HD's webpage</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hirak Doshi</title>
+<meta name="description" content="Hirak Doshi — ICMR Project Research Scientist, IIT Kanpur. Applied mathematics, motion estimation, diffusion MRI.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
 </head>
 <body>
-    <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
 
-    <div class="container">
-        <div class="left-side">
-            <div class="profile-image">
-                <img src="/images/profile.JPG" alt="Your Image">
-            </div>
-            <div class="main-links">
-                <a href="index.html" class="nav-link active">  Home</a>
-                <a href="research.html">Research</a>
-                <a href="teaching.html">Teaching</a>
-                <a href="project.html">Projects</a>
-                <a href="interests.html">Interests</a>
-                <a href="techtips.html">Tech Tips</a>
-            </div>
-          </div>
-        <div class="right-side">
-            <div class="home">
-                <table>
-                    <tr>
-                        <td colspan="2" rowspan="2">
-                            <h2>Welcome to My Homepage</h2>
-                            <span>Developed by: Hirak Doshi</span>
-                        </td>
-                        <th>Total Repo Commits</th>
-                        <td>74</td>
-                    </tr>
-                    <tr>
-                        <th>Last Updated</th>
-                        <td>19-04-2025</td>
-                    </tr>
-                    <tr>
-                        <th>Socials</th>
-                        <td>
-                            <a class="social-links" href="https://twitter.com/beinghd16/"> Twitter</a>,
-                            <a class="social-links" href="https://github.com/being-hd">Github</a>,
-                            <a class="social-links" href="https://linkedin.com/in/hirak-doshi/">LinkedIn</a>
-                        </td>
-                        <th>Contact</th>
-                        <td><a href="mailto:hd92sssihl.psn@gmail.com">hd92sssihl.psn@gmail.com</a></td>
-                    </tr>
-                  </table>
-                  <br>
-                    <h3>About</h3>
-                        Greetings. I am Hirak Doshi from Kolkata, West Bengal, India. This website serves as a platform to share my insights, work experiences and learnings. Join me in my journey of exploration, discovery and growth.
+<button class="header-toggle" id="headerToggle">menu</button>
 
-                        <h3> Current Affiliation</h3>
-                        ICMR Project Research Scientist (Non-Medical)
-                        <br>
-                        Department of Mathematics and Statistics,
-                        <br>
-                        IIT Kanpur
-                        <br>
-                        Collaborations: King George's Medical University (KGMU), Lucknow and University of Pittsburg, USA.
-                        <br>
-                        Email (Official): <a href="mailto:hirakd@iitk.ac.in">hirakd@iitk.ac.in</a>
-                        <h3>Education</h3>
-                        <strong>Ph.D. Mathematics</strong>, <a href="https://www.sssihl.edu.in">SSSIHL</a>
-                        <br>
-                        <strong>Doctoral Thesis:</strong> Variational Motion Estimation in Digital Images
-                        with Fluid and Rotational Motion: A New Paradigm.
-                        <br><br>
-                        <strong>M.Sc. Mathematics (Specialization in Applied Mathematics)</strong>, SSSIHL
-                        <br>
-                        <strong>Masters Thesis:</strong> A Study on Spaces of Type S.
-                        <br><br>
-                        <strong>B.Sc. Honours Mathematics</strong>, SSSIHL
-                        <!-- <br> 
-                        The Bhawanipur Gujarati Education Society School
-                        (<a href="https://www.thebgesschool.com/">BGESS-ICSE</a>,
-                         <a href="https://bgess-isc.edu.in/">BGESS-ISC</a>)
-                            </li>-->
+<header class="site-header">
+    <div class="nav-wrap" id="navWrap">
+        <ul class="main-nav">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="teaching.html">Teaching</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <!-- <li><a href="interests.html">Interests</a></li> -->
+            <!-- <li><a href="techtips.html">Tech&nbsp;Tips</a></li> -->
+        </ul>
+    </div>
+    <div class="nav-rule"></div>
+</header>
 
-                        <h3>Personal Info</h3>
-                        <strong>Date of Birth:</strong> November 16, 1992
-                        <br>
-                        <strong>Nationality:</strong> Indian
-                        <br>
-                        <strong>Languages:</strong> Bengali, Gujarati, Hindi, English
+<div class="shell">
+    <!-- ============== MAIN COLUMN ============== -->
+    <main class="main-col">
+
+        <section class="block about-block">
+            <div class="portrait">
+                <img src="/images/profile.JPG" alt="Portrait of Hirak Doshi">
             </div>
+            <div>
+                <h1 class="about-name">Hirak Doshi, Ph.D.</h1>
+                <p class="about-titles">Applied Mathematics<span class="sep">·</span>Vision &amp; Motion Estimation<span class="sep">·</span>Computational Neuroscience</p>
+                <p class="about-desc">I am an applied mathematician and computational researcher interested in understanding and solving problems in imaging. My work spans mathematical image processing, motion estimation, computer vision, computational neuroscience, and medical imaging, with a particular focus on diffusion MRI.</p>
+                <p class="about-desc">I am interested in developing computational methods that bring together mathematical modeling, variational and PDE-based approaches, and deep learning. Welcome to my website — I hope you enjoy exploring my research, teaching, projects, and some of the other things I work on.</p>
+            </div>
+        </section>
+
+        <section class="block">
+            <p class="block-label">Education</p>
+
+            <div class="affil-item past">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div>
+                    <h4>Ph.D., Mathematics</h4>
+                    <p><a href="https://www.sssihl.edu.in">SSSIHL</a> </p>
+                    <p>Thesis — Variational Motion Estimation in Digital Images with Fluid and Rotational Motion: A New Paradigm.</p>
+                </div>
+            </div>
+
+            <div class="affil-item past">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div>
+                    <h4>M.Sc., Applied Mathematics</h4>
+                    <p>SSSIHL</p>
+                    <p>Thesis — A Study on Spaces of Type S.</p>
+                </div>
+            </div>
+
+            <div class="affil-item past">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div>
+                    <h4>B.Sc. Honours, Mathematics</h4>
+                    <p>SSSIHL</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="block">
+            <p class="block-label">Affiliations</p>
+
+            <div class="affil-item">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div>
+                    <h4>ICMR Research Associate <span class="badge">current</span></h4>
+                    <p>Department of Mathematics &amp; Statistics, IIT Kanpur (jointly with KGMU, Lucknow)</p>
+                </div>
+            </div>
+
+            <div class="affil-item past">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div>
+                    <h4>Visiting Researcher</h4>
+                    <p>University of Pittsburgh — diffusion MRI / TBI collaborative research visit, July–August 2025.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="block">
+            <p class="block-label">Beyond Research</p>
+            <div class="elsewhere-grid">
+                <div class="now-list">
+                    <div class="now-item">
+                        <span class="now-led" aria-hidden="true"></span>
+                        <div>
+                            <span class="now-label">Current research</span>
+                            <span class="now-value">Retinal vessel segmentation</span>
+                        </div>
+                    </div>
+                    <div class="now-item">
+                        <span class="now-led" aria-hidden="true"></span>
+                        <div>
+                            <span class="now-label">Currently volunteering</span>
+                            <span class="now-value">Mission English Programme, Sri Sathya Sai Vidya Vahini (<a href="https://www.srisathyasaividyavahini.org/activities/mission-english/">SSSVV →</a>)</span>
+                        </div>
+                    </div>
+                    <div class="now-item">
+                        <span class="now-led" aria-hidden="true"></span>
+                        <div>
+                            <span class="now-label">Current cause</span>
+                            <span class="now-value">Animal welfare</span>
+                        </div>
+                    </div>
+                    <div class="now-item">
+                        <span class="now-led" aria-hidden="true"></span>
+                        <div>
+                            <span class="now-label">Currently playing</span>
+                            <span class="now-value">Atomic &amp; Antichess variants</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-grid stat-grid-2col">
+                    <div class="stat-box"><div class="num">4</div><div class="lbl">Languages spoken</div></div>
+                    <div class="stat-box"><div class="num">16</div><div class="lbl">November — DOB</div></div>
+                    <div class="stat-box"><div class="num">4</div><div class="lbl">Publications</div></div>
+                    <div class="stat-box"><div class="num">4</div><div class="lbl">Courses taught</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============== SIDE COLUMN ============== -->
+    <aside class="side-col">
+        <section class="research-block">
+            <p class="side-title">What I'm Reading</p>
+            <p class="side-sub">Not my papers — recent work from the field, rotating every few days via CrossRef</p>
+            <div id="paperList">
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Mathematical Imaging</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Motion / Optical Flow</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Diffusion MRI</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+            </div>
+        </section>
+
+        <section class="puzzle-block">
+            <p class="side-title">Mate Break</p>
+            <p class="side-sub">Clear your head with today's Lichess puzzle — no login, no leaving the page</p>
+            <div class="puzzle-card">
+                <p class="puzzle-turn" id="puzzleTurnLabel">Loading today's puzzle…</p>
+                <button class="btn" id="openPuzzleBtn">Solve the puzzle →</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; Hirak Doshi <span id="year"></span></p>
+    <a class="footer-contact" href="mailto:hd92sssihl.psn@gmail.com">Contact me →</a>
+    <div class="footer-socials">
+        <a href="https://twitter.com/beinghd16/">X</a>
+        <a href="https://github.com/being-hd">GitHub</a>
+        <a href="https://linkedin.com/in/hirak-doshi/">LinkedIn</a>
+    </div>
+</footer>
+
+<!-- ============== PAPER MODAL ============== -->
+<div class="modal-overlay" id="paperModal">
+    <div class="modal-box">
+        <button class="modal-close" id="paperModalClose">&times;</button>
+        <span class="modal-tag" id="pmTag">Math</span>
+        <h3 id="pmTitle">—</h3>
+        <p class="modal-meta"><strong>Authors:</strong> <span id="pmAuthors">—</span></p>
+        <p class="modal-meta"><strong>Journal:</strong> <span id="pmJournal">—</span></p>
+        <p class="modal-meta"><strong>Year:</strong> <span id="pmYear">—</span></p>
+        <p class="modal-abstract" id="pmAbstract">—</p>
+        <div class="modal-keywords" id="pmKeywords"></div>
+        <a class="btn" id="pmLink" href="#" target="_blank" rel="noopener">Read on publisher site →</a>
+    </div>
+</div>
+
+<!-- ============== PUZZLE MODAL ============== -->
+<div class="modal-overlay" id="puzzleModal">
+    <div class="modal-box">
+        <button class="modal-close" id="puzzleModalClose">&times;</button>
+        <span class="modal-tag">Lichess Puzzle of the Day</span>
+        <h3 id="pzTurnLabel">—</h3>
+        <div id="puzzleBoard"></div>
+        <p class="puzzle-status" id="puzzleStatus">Make your move — drag a piece to begin.</p>
+        <div class="puzzle-actions">
+            <button class="btn btn-ghost" id="puzzleResetBtn">Reset</button>
+            <a class="btn" id="puzzleAnalyzeBtn" href="#" target="_blank" rel="noopener">Analyze on Lichess →</a>
         </div>
     </div>
-      <!-- 2. Include your JS -->
-  <script src="script.js"></script>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

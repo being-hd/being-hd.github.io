@@ -1,114 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projects</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Hirak Doshi</title>
+<meta name="description" content="Current research project, technical skills, memberships, certifications, and open-source projects by Hirak Doshi.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
 </head>
 <body>
-  <div class="container">
-    <div class="left-side">
 
-      <div class="profile-image">
-        <img src="/images/profile.JPG" alt="Your Image">
-      </div>
-            
-      <div class="main-links">
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="teaching.html">Teaching</a>
-        <a href="projects.html" class="nav-link active">Projects</a>
-        <a href="interests.html">Interests</a>
-        <a href="techtips.html">Tech Tips</a>
-      </div>
+<button class="header-toggle" id="headerToggle">menu</button>
+
+<header class="site-header">
+    <div class="nav-wrap" id="navWrap">
+        <ul class="main-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="teaching.html">Teaching</a></li>
+            <li><a href="project.html" aria-current="page">Projects</a></li>
+            <!-- <li><a href="interests.html">Interests</a></li> -->
+            <!-- <li><a href="techtips.html">Tech&nbsp;Tips</a></li> -->
+        </ul>
     </div>
-    
-    <div class="right-side">
-      <div class="project">
-        
-        <h2>Projects and Affiliations</h2>
+    <div class="nav-rule"></div>
+</header>
 
-        <h3>Current Research Project</h3>
-        <strong>ICMR Project (2024-Present):</strong> Prognostic Role of Traumatic Brain Injury-Induced White Matter Changes:
-        A Longitudinal Advanced Diffusion MRI Study Leveraging Super-Resolution and Artificial Intelligence.
+<div class="shell">
+    <main class="main-col">
 
-        <h3> Technical Skills</h3>
-        <strong>Programming Languages:</strong> Python, HTML-CSS, Java, C++, C
-        <br>
-        <strong>Programming Softwares:</strong> MATLAB, LaTeX, FreeFEM++, MS-Office, SAGE
-        <br>
-        <strong>Python Packages:</strong> OpenCV, PyTorch, SciPy, NumPy, Display
-        <br>
-        <strong>Neuroimaging Packages:</strong> MRTrix, FSL, ANTs
-        <br>
-        <strong>Operating Systems:</strong> Linux, Windows
+        <section class="block" style="border-top: none; padding-top: 0;">
+            <h1 class="about-name" style="font-size: clamp(1.9rem, 1.5rem + 2vw, 2.5rem); margin-bottom: 10px;">Projects &amp; affiliations</h1>
+            <p class="about-desc">Current research project, technical skills, memberships, and open-source work.</p>
+        </section>
 
-    <h3> Memberships and Affiliations</h3>
-    <ol>
-        <li>
-        International Society for Magnetic Resonance in Medicine (ISMRM), (Student Member, ID: 289).
-        </li>
-        <li>
-        Calcutta Mathematical Society (CMS), (Life Member, ID: LD/110).
-        </li>
-        <li>
-        International Association of Engineers (IAENG), (ID: 374515).
-        </li>
-        <li>
-        All India Chess Federation (AICF), (ID: 171152WB2022).
-        </li>
-        <li>
-        International Chess Federation (FIDE), (ID: 48778737).
-        </li>
-    </ol>
+        <section class="block">
+            <p class="block-label">Current research project</p>
+            <p class="about-desc"><strong>ICMR Project (2024–present):</strong> Prognostic Role of Traumatic Brain Injury-Induced White Matter Changes: A Longitudinal Advanced Diffusion MRI Study Leveraging Super-Resolution and Artificial Intelligence.</p>
+        </section>
 
-    <h3> Certifications </h3>
-    <ol>
-        <li>
-         The Complete Python Bootcamp: From Zero to Hero in Python.
-         <br>
-         Offered by: Jose Portilla, Platform: Udemy.  
-        </li>
-        <li>
-        Cybersecurity Roles, Processes & Operating System Security.
-        <br>
-         Offered by: IBM, Platform: Coursera.
-        </li>
-        <li>
-        Computer Vision Basics.
-        <br>
-        Offered by: University at Buffalo and The State
-        University of New York, Platform: Coursera.
-        </li>
-        <li>
-        Image Processing with Python.
-        <br>
-        Offered by: Coursera Project Network, Platform: Coursera.
-        </li>
-    </ol>
+        <section class="block">
+            <p class="block-label">Technical skills</p>
+            <div class="kv-list">
+                <div class="kv-row"><span class="k">Languages</span><span class="v">Python, HTML/CSS, Java, C++, C</span></div>
+                <div class="kv-row"><span class="k">Software</span><span class="v">MATLAB, LaTeX, FreeFEM++, MS Office, SAGE</span></div>
+                <div class="kv-row"><span class="k">Python</span><span class="v">OpenCV, PyTorch, SciPy, NumPy, Display</span></div>
+                <div class="kv-row"><span class="k">Neuroimaging</span><span class="v">MRtrix, FSL, ANTs</span></div>
+                <div class="kv-row"><span class="k">OS</span><span class="v">Linux, Windows</span></div>
+            </div>
+        </section>
 
-    <h3>Github Projects</h3>
-    <ol>
-        <li>
-            <strong>Riemann Integral:</strong> Computing Riemann Integral using first principles.
-            (<a href="https://github.com/being-hd/riemann_integral">Github Link</a>)
-        </li>
-        <li>
-            <strong>Lebesgue Integral:</strong> Computing Lebesgue Integral using pre-image of measurable sets.
-            (<a href="https://github.com/being-hd/lebesgue_integral">Github Link</a>)
-        </li>
-        <li>
-            <strong>The Knight's Tour:</strong> The classical knight's tour game.
-            (<a href="https://github.com/being-hd/knight-tour">Github Link</a>)
-        </li>
-        <li>
-            <strong>Tic-Tac-Toe:</strong> The classical tic-tac-toe game.
-            (<a href="https://github.com/being-hd/tic-tac-toe">Github Link</a>)
-        </li>
-    </ol>
-   <!-- 2. Include your JS -->
-  <script src="script.js"></script>
+        <section class="block">
+            <p class="block-label">Memberships &amp; affiliations</p>
+            <div class="card-grid">
+                <div class="info-tile"><h4>ISMRM</h4><p>International Society for Magnetic Resonance in Medicine</p><span class="tile-meta">Student member · ID 289</span></div>
+                <div class="info-tile"><h4>CMS</h4><p>Calcutta Mathematical Society</p><span class="tile-meta">Life member · ID LD/110</span></div>
+                <div class="info-tile"><h4>IAENG</h4><p>International Association of Engineers</p><span class="tile-meta">ID 374515</span></div>
+                <div class="info-tile"><h4>AICF</h4><p>All India Chess Federation</p><span class="tile-meta">ID 171152WB2022</span></div>
+                <div class="info-tile"><h4>FIDE</h4><p>International Chess Federation</p><span class="tile-meta">ID 48778737</span></div>
+            </div>
+        </section>
+
+        <section class="block">
+            <p class="block-label">Certifications</p>
+            <div class="card-grid">
+                <div class="info-tile"><h4>The Complete Python Bootcamp</h4><p>From Zero to Hero in Python</p><span class="tile-meta">Jose Portilla · Udemy</span></div>
+                <div class="info-tile"><h4>Cybersecurity Roles, Processes &amp; OS Security</h4><p></p><span class="tile-meta">IBM · Coursera</span></div>
+                <div class="info-tile"><h4>Computer Vision Basics</h4><p></p><span class="tile-meta">Univ. at Buffalo / SUNY · Coursera</span></div>
+                <div class="info-tile"><h4>Image Processing with Python</h4><p></p><span class="tile-meta">Coursera Project Network</span></div>
+            </div>
+        </section>
+
+        <section class="block">
+            <p class="block-label">GitHub projects</p>
+            <div class="card-grid">
+                <div class="info-tile"><h4>Riemann Integral</h4><p>Computing the Riemann integral from first principles.</p><span class="tile-meta"><a href="https://github.com/being-hd/riemann_integral">GitHub →</a></span></div>
+                <div class="info-tile"><h4>Lebesgue Integral</h4><p>Computing the Lebesgue integral via pre-images of measurable sets.</p><span class="tile-meta"><a href="https://github.com/being-hd/lebesgue_integral">GitHub →</a></span></div>
+                <div class="info-tile"><h4>Knight's Tour</h4><p>The classical knight's tour game.</p><span class="tile-meta"><a href="https://github.com/being-hd/knight-tour">GitHub →</a></span></div>
+                <div class="info-tile"><h4>Tic-Tac-Toe</h4><p>The classical tic-tac-toe game.</p><span class="tile-meta"><a href="https://github.com/being-hd/tic-tac-toe">GitHub →</a></span></div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="side-col">
+        <section class="research-block">
+            <p class="side-title">What I'm Reading</p>
+            <p class="side-sub">Not my papers — recent work from the field, rotating every few days via CrossRef</p>
+            <div id="paperList">
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Mathematical Imaging</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Motion / Optical Flow</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Diffusion MRI</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+            </div>
+        </section>
+
+        <section class="puzzle-block">
+            <p class="side-title">Mate Break</p>
+            <p class="side-sub">Clear your head with today's Lichess puzzle — no login, no leaving the page</p>
+            <div class="puzzle-card">
+                <p class="puzzle-turn" id="puzzleTurnLabel">Loading today's puzzle…</p>
+                <button class="btn" id="openPuzzleBtn">Solve the puzzle →</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; Hirak Doshi <span id="year"></span></p>
+    <a class="footer-contact" href="mailto:hd92sssihl.psn@gmail.com">Contact me →</a>
+    <div class="footer-socials">
+        <a href="https://twitter.com/beinghd16/">X</a>
+        <a href="https://github.com/being-hd">GitHub</a>
+        <a href="https://linkedin.com/in/hirak-doshi/">LinkedIn</a>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="paperModal">
+    <div class="modal-box">
+        <button class="modal-close" id="paperModalClose">&times;</button>
+        <span class="modal-tag" id="pmTag">Math</span>
+        <h3 id="pmTitle">—</h3>
+        <p class="modal-meta"><strong>Authors:</strong> <span id="pmAuthors">—</span></p>
+        <p class="modal-meta"><strong>Journal:</strong> <span id="pmJournal">—</span></p>
+        <p class="modal-meta"><strong>Year:</strong> <span id="pmYear">—</span></p>
+        <p class="modal-abstract" id="pmAbstract">—</p>
+        <div class="modal-keywords" id="pmKeywords"></div>
+        <a class="btn" id="pmLink" href="#" target="_blank" rel="noopener">Read on publisher site →</a>
+    </div>
+</div>
+
+<div class="modal-overlay" id="puzzleModal">
+    <div class="modal-box">
+        <button class="modal-close" id="puzzleModalClose">&times;</button>
+        <span class="modal-tag">Lichess Puzzle of the Day</span>
+        <h3 id="pzTurnLabel">—</h3>
+        <div id="puzzleBoard"></div>
+        <p class="puzzle-status" id="puzzleStatus">Make your move — drag a piece to begin.</p>
+        <div class="puzzle-actions">
+            <button class="btn btn-ghost" id="puzzleResetBtn">Reset</button>
+            <a class="btn" id="puzzleAnalyzeBtn" href="#" target="_blank" rel="noopener">Analyze on Lichess →</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

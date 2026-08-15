@@ -1,9 +1,296 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btn     = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.left-side');
-  
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---------------------------------------------------------
+       Mobile nav toggle
+    --------------------------------------------------------- */
+    const headerToggle = document.getElementById('headerToggle');
+    const navWrap = document.getElementById('navWrap');
+    if (headerToggle && navWrap) {
+        headerToggle.addEventListener('click', () => navWrap.classList.toggle('open'));
+    }
+
+    /* ---------------------------------------------------------
+       Generic modal helpers
+    --------------------------------------------------------- */
+    function wireModal(overlayId, closeBtnId) {
+        const overlay = document.getElementById(overlayId);
+        const closeBtn = document.getElementById(closeBtnId);
+        const open = () => { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
+        const close = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
+        closeBtn.addEventListener('click', close);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+        return { open, close };
+    }
+
+    const paperModal = wireModal('paperModal', 'paperModalClose');
+    const puzzleModal = wireModal('puzzleModal', 'puzzleModalClose');
+
+    /* ===========================================================
+       LATEST RESEARCH
+       Three fixed categories, rotated deterministically by date
+       (changes automatically every 2-3 days — no backend needed).
+       Sources: CrossRef + PubMed (both free, CORS-enabled, no key).
+    =========================================================== */
+    const CATEGORIES = [
+        {
+            tag: 'Mathematical Imaging',
+            crossrefQuery: 'mathematical imaging inverse problems variational methods optimization functional analysis',
+            matchTerms: ['mathematical imaging', 'inverse problem', 'image reconstruction', 'variational method', 'regularization', 'convex optimization', 'functional analysis', 'real analysis', 'operator theory']
+        },
+        {
+            tag: 'Motion & Optical Flow',
+            crossrefQuery: 'optical flow motion estimation image sequence variational deep learning',
+            matchTerms: ['optical flow', 'motion estimation', 'motion field', 'image registration', 'video frame', 'image sequence']
+        },
+        {
+            tag: 'Diffusion MRI',
+            crossrefQuery: 'diffusion MRI fiber tractography deep learning neuroimaging',
+            matchTerms: ['diffusion mri', 'diffusion-weighted', 'tractography', 'diffusion tensor', 'dwi', 'neuroimaging', 'prostate']
+        }
+    ];
+
+    // A "rotation index" that only changes every 3 days, so the same
+    // trio of papers holds steady across visits and then advances.
+    function rotationIndex() {
+        const epoch = new Date('2025-01-01T00:00:00Z').getTime();
+        const days = Math.floor((Date.now() - epoch) / 86400000);
+        return Math.floor(days / 3);
+    }
+
+    function todayISO() {
+        return new Date().toISOString().slice(0, 10);
+    }
+
+    function extractYear(item) {
+        const parts = (item.published && item.published['date-parts']) ||
+                      (item['published-print'] && item['published-print']['date-parts']) ||
+                      (item['published-online'] && item['published-online']['date-parts']);
+        return parts && parts[0] && parts[0][0];
+    }
+
+    function cleanAbstract(raw) {
+        const text = raw.replace(/<[^>]+>/g, '').trim();
+        // CrossRef abstracts are often JATS-wrapped with a literal
+        // "Abstract" title tag; stripping tags leaves it glued to the
+        // first sentence (e.g. "AbstractOperator splitting..."). Remove it.
+        return text.replace(/^Abstract\s*/i, '').trim();
+    }
+
+    function isRelevant(item, matchTerms) {
+        const haystack = `${(item.title && item.title[0]) || ''} ${item.abstract || ''}`.toLowerCase();
+        return matchTerms.some(term => haystack.includes(term));
+    }
+
+    async function fetchCrossrefPaper(category, rotIdx) {
+        const currentYear = new Date().getFullYear();
+        // Try a handful of offset windows, each time only accepting a result
+        // that (a) has a real abstract, (b) falls in a genuinely "recent"
+        // window — 2020 or later, not just "not in the future" — and
+        // (c) is topically on-target.
+        const MIN_YEAR = 2020;
+        for (let attempt = 0; attempt < 5; attempt++) {
+            const offset = ((rotIdx + attempt) % 10) * 5;
+            const url = `https://api.crossref.org/works?query.bibliographic=${encodeURIComponent(category.crossrefQuery)}` +
+                        `&filter=has-abstract:true,type:journal-article,from-pub-date:${MIN_YEAR}-01-01,until-pub-date:${todayISO()}` +
+                        `&sort=relevance&order=desc&rows=5&offset=${offset}`;
+            const res = await fetch(url);
+            if (!res.ok) continue;
+            const data = await res.json();
+            const items = data.message.items || [];
+
+            for (const item of items) {
+                const year = extractYear(item);
+                if (!item.abstract) continue;
+                if (!year || year > currentYear || year < MIN_YEAR) continue;
+                if (!isRelevant(item, category.matchTerms)) continue;
+
+                return {
+                    title: (item.title && item.title[0]) || 'Untitled',
+                    authors: (item.author || []).slice(0, 5).map(a => `${a.given || ''} ${a.family || ''}`.trim()).join(', ') || 'Authors unavailable',
+                    journal: (item['container-title'] && item['container-title'][0]) || item.publisher || 'Unknown venue',
+                    year: year,
+                    abstract: cleanAbstract(item.abstract),
+                    keywords: item.subject || [],
+                    url: item.URL || (item.DOI ? `https://doi.org/${item.DOI}` : '#')
+                };
+            }
+        }
+        throw new Error('no qualifying paper found');
+    }
+
+    function renderPaperCard(container, category, paper) {
+        container.innerHTML = `
+            <span class="paper-tag">${category.tag}</span>
+            <p class="paper-title">${paper.title}</p>
+            <p class="paper-meta">${paper.journal} · ${paper.year}</p>
+        `;
+        container.classList.remove('paper-skeleton');
+        container.addEventListener('click', () => {
+            document.getElementById('pmTag').textContent = category.tag;
+            document.getElementById('pmTitle').textContent = paper.title;
+            document.getElementById('pmAuthors').textContent = paper.authors;
+            document.getElementById('pmJournal').textContent = paper.journal;
+            document.getElementById('pmYear').textContent = paper.year;
+            document.getElementById('pmAbstract').textContent = paper.abstract;
+            document.getElementById('pmLink').href = paper.url;
+            const kwWrap = document.getElementById('pmKeywords');
+            kwWrap.innerHTML = '';
+            (paper.keywords || []).slice(0, 6).forEach(k => {
+                const span = document.createElement('span');
+                span.className = 'chip';
+                span.textContent = k;
+                kwWrap.appendChild(span);
+            });
+            paperModal.open();
+        });
+    }
+
+    async function loadPapers() {
+        const listEl = document.getElementById('paperList');
+        const cards = listEl.querySelectorAll('.paper-card');
+        const rotIdx = rotationIndex();
+
+        for (let i = 0; i < CATEGORIES.length; i++) {
+            const category = CATEGORIES[i];
+            const card = cards[i];
+            try {
+                const paper = await fetchCrossrefPaper(category, rotIdx);
+                renderPaperCard(card, category, paper);
+            } catch (err) {
+                card.innerHTML = `
+                    <span class="paper-tag">${category.tag}</span>
+                    <p class="paper-title">Couldn't reach CrossRef right now.</p>
+                    <p class="paper-meta">Refresh to retry</p>
+                `;
+                card.classList.remove('paper-skeleton');
+            }
+        }
+    }
+
+    loadPapers();
+
+    /* ===========================================================
+       CHESS PUZZLE — Lichess daily puzzle, solvable in-page
+    =========================================================== */
+    let puzzleData = null;
+    let board = null;
+    let game = null;
+    let solutionMoves = [];
+    let solutionIdx = 0;
+    let puzzleColor = 'white';
+
+    function uciToMove(uci) {
+        return { from: uci.slice(0, 2), to: uci.slice(2, 4), promotion: uci.length > 4 ? uci[4] : undefined };
+    }
+
+    async function loadDailyPuzzle() {
+        const label = document.getElementById('puzzleTurnLabel');
+        try {
+            const res = await fetch('https://lichess.org/api/puzzle/daily');
+            if (!res.ok) throw new Error('puzzle fetch failed');
+            const data = await res.json();
+            puzzleData = data;
+
+            const pgn = data.game.pgn;
+            const initialPly = data.puzzle.initialPly;
+            solutionMoves = data.puzzle.solution;
+
+            // Replay the PGN up to initialPly to get the starting FEN for the puzzle.
+            const replay = new Chess();
+            replay.load_pgn(pgn);
+            const history = replay.history({ verbose: true });
+            replay.reset();
+            for (let i = 0; i <= initialPly; i++) {
+                if (history[i]) replay.move(history[i].san);
+            }
+
+            game = replay;
+            puzzleColor = game.turn() === 'w' ? 'white' : 'black';
+
+            label.innerHTML = `${puzzleColor === 'white' ? 'White' : 'Black'} to move — <span class="side-tag">find the winning line</span>`;
+        } catch (err) {
+            label.textContent = "Couldn't load today's puzzle. Try again shortly.";
+        }
+    }
+
+    function setupBoard() {
+        if (!game) return;
+        solutionIdx = 0;
+        const statusEl = document.getElementById('puzzleStatus');
+        statusEl.textContent = 'Make your move — drag a piece to begin.';
+        statusEl.className = 'puzzle-status';
+        document.getElementById('pzTurnLabel').textContent =
+            `${puzzleColor === 'white' ? 'White' : 'Black'} to play`;
+
+        if (board) { board.destroy(); }
+        board = Chessboard('puzzleBoard', {
+            position: game.fen(),
+            draggable: true,
+            orientation: puzzleColor,
+            pieceTheme: 'https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/piece/cburnett/{piece}.svg',
+            onDrop: handleDrop
+        });
+    }
+
+    function handleDrop(source, target) {
+        if (solutionIdx >= solutionMoves.length) return 'snapback';
+
+        const expected = uciToMove(solutionMoves[solutionIdx]);
+        const move = game.move({ from: source, to: target, promotion: 'q' });
+        const statusEl = document.getElementById('puzzleStatus');
+
+        if (!move) return 'snapback';
+
+        if (source === expected.from && target === expected.to) {
+            solutionIdx++;
+            statusEl.textContent = 'Correct!';
+            statusEl.className = 'puzzle-status correct';
+
+            if (solutionIdx >= solutionMoves.length) {
+                statusEl.textContent = 'Puzzle solved! Nicely done.';
+                board.position(game.fen());
+                return;
+            }
+
+            // Opponent's reply, played automatically.
+            setTimeout(() => {
+                const replyUci = solutionMoves[solutionIdx];
+                if (replyUci) {
+                    const reply = uciToMove(replyUci);
+                    game.move({ from: reply.from, to: reply.to, promotion: reply.promotion || 'q' });
+                    board.position(game.fen());
+                    solutionIdx++;
+                    if (solutionIdx >= solutionMoves.length) {
+                        statusEl.textContent = 'Puzzle solved! Nicely done.';
+                        statusEl.className = 'puzzle-status correct';
+                    } else {
+                        statusEl.textContent = 'Correct — your move again.';
+                        statusEl.className = 'puzzle-status correct';
+                    }
+                }
+            }, 350);
+        } else {
+            game.undo();
+            statusEl.textContent = 'Not quite — try another move.';
+            statusEl.className = 'puzzle-status wrong';
+            return 'snapback';
+        }
+    }
+
+    document.getElementById('openPuzzleBtn').addEventListener('click', () => {
+        puzzleModal.open();
+        if (puzzleData) {
+            setupBoard();
+            document.getElementById('puzzleAnalyzeBtn').href = `https://lichess.org/training/${puzzleData.puzzle.id}`;
+        }
     });
-  });
-  
+
+    document.getElementById('puzzleResetBtn').addEventListener('click', () => {
+        if (!puzzleData) return;
+        loadDailyPuzzle().then(setupBoard);
+    });
+
+    loadDailyPuzzle();
+});
