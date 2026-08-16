@@ -433,7 +433,8 @@ strong { color: var(--accent-bright); font-weight: 600; }
 
 @media screen and (max-width: 720px) {
     .elsewhere-grid { grid-template-columns: 1fr; }
-    .stat-grid { grid-template-columns: repeat(3, 1fr); }
+    .stat-grid:not(.stat-grid-2col) { grid-template-columns: repeat(3, 1fr); }
+    .stat-grid-2col { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ===========================================================

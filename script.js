@@ -172,6 +172,41 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPapers();
 
     /* ===========================================================
+       LIVE REPO COMMIT COUNT
+       GitHub's API has no direct "total commits" endpoint. The
+       standard trick: request 1 commit per page, then read the
+       last page number from the response's Link header — that
+       number equals the total commit count. Public repo, no auth
+       needed, but shares GitHub's unauthenticated rate limit
+       (60 requests/hour per visitor IP).
+    =========================================================== */
+    async function loadCommitCount() {
+        const el = document.getElementById('commitCount');
+        if (!el) return;
+        try {
+            const res = await fetch('https://api.github.com/repos/being-hd/being-hd.github.io/commits?per_page=1');
+            if (!res.ok) throw new Error('github api error');
+
+            const link = res.headers.get('Link');
+            let count;
+            if (link) {
+                const match = link.match(/[?&]page=(\d+)>;\s*rel="last"/);
+                count = match ? parseInt(match[1], 10) : null;
+            }
+            if (!count) {
+                // No Link header means everything fit on one page.
+                const data = await res.json();
+                count = data.length;
+            }
+            el.textContent = count;
+        } catch (err) {
+            el.textContent = '—';
+        }
+    }
+
+    loadCommitCount();
+
+    /* ===========================================================
        CHESS PUZZLE — Lichess daily puzzle, solvable in-page
     =========================================================== */
     let puzzleData = null;
