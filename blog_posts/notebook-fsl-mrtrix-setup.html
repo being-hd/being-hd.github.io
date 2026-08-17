@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Teaching — Hirak Doshi</title>
-<meta name="description" content="From linear algebra to image pipelines: teaching the math that turns pixels into understanding.">
+<title>Setting up FSL and MRtrix3 on Linux — Notebook — Hirak Doshi</title>
+<meta name="description" content="A working setup guide for FSL and MRtrix3 on a fresh Linux install, including the environment variables that actually matter.">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
 </head>
 <body>
@@ -16,13 +16,11 @@
 <header class="site-header">
     <div class="nav-wrap" id="navWrap">
         <ul class="main-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="teaching.html" aria-current="page">Teaching</a></li>
-                        <li><a href="project.html">Projects</a></li>
-            <li><a href="notebook.html">Notebook</a></li>
-            <!-- <li><a href="interests.html">Interests</a></li> -->
-            <!-- <li><a href="techtips.html">Tech&nbsp;Tips</a></li> -->
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../research.html">Research</a></li>
+            <li><a href="../teaching.html">Teaching</a></li>
+            <li><a href="../project.html">Projects</a></li>
+            <li><a href="../notebook.html" aria-current="page">Notebook</a></li>
         </ul>
     </div>
     <div class="nav-rule"></div>
@@ -32,49 +30,53 @@
     <main class="main-col">
 
         <section class="block" style="border-top: none; padding-top: 0;">
-            <h1 class="about-name" style="font-size: clamp(1.9rem, 1.5rem + 2vw, 2.5rem); margin-bottom: 10px;">Teaching experience</h1>
-            <p class="about-desc">From linear algebra to image pipelines: teaching the math that turns pixels into understanding.</p>
+            <a class="article-back" href="../notebook.html">← Back to Notebook</a>
+            <div class="article-meta">
+                <span class="post-tag">Neuroimaging Tools</span>
+            </div>
+            <h1 class="about-name" style="font-size: clamp(1.7rem, 1.4rem + 1.6vw, 2.3rem); margin-bottom: 10px;">Setting up FSL and MRtrix3 on Linux</h1>
         </section>
 
-        <section class="block">
-            <p class="block-label">Courses &amp; labs</p>
-            <ol class="entry-list">
-                <li class="entry-item">
-                    <div>
-                        <p class="entry-title"><strong>Python Programming Lab</strong> (BIO-401B) — Summer 2024</p>
-                        <p class="entry-meta">Invited guest lectures · MIT World Peace University, Pune · 2 months (5 lectures) · Online</p>
-                        <p class="entry-desc">Topics: basic operations, variables, data types, lists, sets, tuples, dictionaries, conditional statements, loops.</p>
-                    </div>
-                </li>
-                <li class="entry-item">
-                    <div>
-                        <p class="entry-title"><strong>Introduction to Linear Algebra</strong> (UMAT-302) — Summer 2023</p>
-                        <p class="entry-meta">Course instructor · SSSIHL, A.P. · 4 months · Offline</p>
-                        <p class="entry-desc">Topics: vector spaces, subspaces, linear (in)dependence, basis, linear transformations, kernels &amp; images, isomorphisms, matrix representations, systems of linear equations, eigenvalues &amp; eigenvectors. <a href="https://github.com/being-hd/lecture-notes" target="_blank" rel="noopener">Lecture notes →</a></p>
-                    </div>
-                </li>
-                <li class="entry-item">
-                    <div>
-                        <p class="entry-title"><strong>Digital Image Processing Lab</strong> (MTCS-104) — Summer 2023</p>
-                        <p class="entry-meta">Teaching assistant · SSSIHL, A.P. · 4 months · Offline</p>
-                        <p class="entry-desc">Topics: OpenCV basics, image I/O and display, intensity transformations, histogram equalization, linear/nonlinear spatial filtering, Fourier transform, frequency-domain filtering, image enhancement, Laplacian sharpening, ideal/Gaussian/Butterworth filters.</p>
-                    </div>
-                </li>
-                <li class="entry-item">
-                    <div>
-                        <p class="entry-title"><strong>Python Programming Lab</strong> (UCSC-202) — Fall 2022–2023</p>
-                        <p class="entry-meta">Course instructor · SSSIHL, A.P. · 4.5 months · Offline</p>
-                        <p class="entry-desc">Topics: basic operations, variables, data types, lists, sets, tuples, dictionaries, loops, conditionals, classes, objects, symbolic computation, data structures, first-order ODEs, pi-approximation, numerical linear algebra basics.</p>
-                    </div>
-                </li>
-                <li class="entry-item">
-                    <div>
-                        <p class="entry-title"><strong>Theory of Partial Differential Equations</strong> (PMAT-301) — Summer 2019</p>
-                        <p class="entry-meta">Teaching assistant · SSSIHL, A.P. · 2 weeks · Offline</p>
-                        <p class="entry-desc">Topics: introduction to Sobolev spaces.</p>
-                    </div>
-                </li>
-            </ol>
+        <section class="block" style="border-top: none; padding-top: 0;">
+            <div class="article-share-row">
+                <span class="post-published">Published on 16 Aug 2026</span>
+                <div class="post-share">
+                    <span class="share-label">Share →</span>
+                    <button class="share-link copy-link-btn" type="button" data-share-url="https://being-hd.github.io/blog_posts/notebook-fsl-mrtrix-setup.html">Copy link</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="block article-body" style="border-top: none; padding-top: 0;">
+            <p> This blog will guide you about how to set-up FMRIB Studio Library (FSL) and MRtrix on linux for neuroimaging tasks.</p>
+
+            <h2>FSL</h2>
+            <p>Don't fight the dependencies by hand — just use the installer script:</p>
+            <pre><code>wget https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
+python3 fslinstaller.py</code></pre>
+            <p>Let it finish. Killing it halfway through is how you end up with a half-broken FSL that nothing quite explains. Default path (<code>/usr/local/fsl</code>) is fine unless you have a reason not to.</p>
+            <p>If <code>fsl</code> isn't found afterward, it's usually just that these never got sourced:</p>
+            <pre><code>export FSLDIR=/usr/local/fsl
+source ${FSLDIR}/etc/fslconf/fsl.sh
+export PATH=${FSLDIR}/bin:${PATH}</code></pre>
+
+            <h2>MRtrix3</h2>
+            <p>Build from source — the multi-shell CSD stuff moves too fast for packaged releases to keep up:</p>
+            <pre><code>git clone https://github.com/MRtrix3/mrtrix3.git
+cd mrtrix3
+./configure
+./build
+./set_path</code></pre>
+            <p>Everyone forgets <code>./set_path</code>. Skip it and <code>dwi2fod</code> just says "command not found," which tells you nothing about what actually went wrong.</p>
+
+            <h2>Making sure they agree with each other</h2>
+            <p>Once you've got a DWI scan converted to NIfTI (say, via <code>dcm2niix</code>) — a <code>dwi.mif</code>, plus a <code>bvecs</code>/<code>bvals</code> pair — it's worth checking that FSL's and MRtrix3's gradient conventions actually line up before you trust either tool with real data:</p>
+            <pre><code>mrinfo -fslgrad bvecs bvals dwi.mif -export_grad_mrtrix grad.b
+mrinfo grad.b -export_grad_fsl check.bvec check.bval
+diff bvecs check.bvec</code></pre>
+            <p>No output from that last line, you're fine.</p>
+
+            <!-- <p>Honestly, most of my "MRtrix bug" moments over the years turned out to be a terminal that never sourced FSL's environment in the first place. Worth ruling out before you go down a rabbit hole.</p> -->
         </section>
     </main>
 
@@ -141,6 +143,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
-<script src="script.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

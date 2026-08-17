@@ -642,3 +642,234 @@ strong { color: var(--accent-bright); font-weight: 600; }
     .main-nav { flex-direction: column; gap: 4px; }
     .nav-rule { display: none; }
 }
+
+/* ===========================================================
+   Notebook — post listing cards
+=========================================================== */
+.post-list { display: flex; flex-direction: column; gap: 2px; }
+
+.post-card {
+    display: block;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-raised);
+    transition: border-color .18s var(--ease), transform .18s var(--ease);
+}
+
+.post-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.post-card:last-child { margin-bottom: 0; }
+
+.post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.post-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+    background: var(--accent);
+    border-radius: 3px;
+    padding: 3px 8px;
+}
+
+.post-date {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-faint);
+}
+
+.post-title {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+.post-title a {
+    color: var(--text);
+    border: none;
+    transition: color .18s var(--ease);
+}
+
+.post-title a:hover { color: var(--accent-bright); }
+
+.post-excerpt {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.post-card.is-placeholder { border-style: dashed; opacity: 0.6; }
+.post-card.is-placeholder:hover { transform: none; border-color: var(--line); }
+.post-card.is-placeholder .post-title { color: var(--text); }
+
+.post-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+}
+
+.post-published {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+}
+
+.post-share {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.share-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 2px;
+}
+
+.share-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-soft);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 9px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .15s var(--ease), border-color .15s var(--ease);
+}
+
+.share-link:hover { color: var(--accent-bright); border-color: var(--accent); }
+
+.code-copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-soft);
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color .15s var(--ease), border-color .15s var(--ease);
+}
+
+.code-copy-btn:hover { color: var(--accent-bright); border-color: var(--accent); }
+
+/* ===========================================================
+   Notebook — individual article page
+=========================================================== */
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.article-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-soft);
+}
+
+.article-body p { margin: 0 0 18px; text-align: justify; text-justify: inter-word; }
+
+.article-body h2 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent-bright);
+    margin: 38px 0 14px;
+}
+
+.article-body h3 {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 28px 0 10px;
+}
+
+.article-body ul, .article-body ol { padding-left: 22px; margin: 0 0 18px; }
+.article-body li { margin-bottom: 8px; }
+
+.article-body code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--accent-bright);
+}
+
+.article-body pre {
+    position: relative;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 40px 18px 16px;
+    overflow-x: auto;
+    margin: 0 0 20px;
+}
+
+.article-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.article-body blockquote {
+    border-left: 2px solid var(--accent);
+    margin: 0 0 20px;
+    padding: 4px 0 4px 18px;
+    color: var(--text-soft);
+    font-style: italic;
+}
+
+.article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-soft);
+    border: none;
+    margin-bottom: 8px;
+}
+
+.article-back:hover { color: var(--accent); }
+
+.article-share-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 0;
+    margin: 4px 0 30px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}

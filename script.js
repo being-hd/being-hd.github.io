@@ -328,4 +328,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadDailyPuzzle();
+
+    /* ===========================================================
+       NOTEBOOK — copy-link buttons (replaces per-platform share
+       links, which depended on Open Graph scraping that isn't set
+       up yet and left LinkedIn/X share dialogs blank)
+    =========================================================== */
+    document.querySelectorAll('.copy-link-btn').forEach((btn) => {
+        const url = btn.getAttribute('data-share-url');
+        const originalLabel = btn.textContent;
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(url);
+                btn.textContent = 'Copied!';
+            } catch (err) {
+                // Clipboard API unavailable (older browser, non-HTTPS, etc.)
+                btn.textContent = 'Copy failed — select manually';
+            }
+            setTimeout(() => { btn.textContent = originalLabel; }, 1800);
+        });
+    });
+
+    /* ===========================================================
+       NOTEBOOK — copy buttons on code blocks
+       Auto-injected for every <pre><code> in .article-body, so
+       future posts get this for free without extra markup.
+    =========================================================== */
+    document.querySelectorAll('.article-body pre').forEach((pre) => {
+        const codeEl = pre.querySelector('code');
+        if (!codeEl) return;
+
+        pre.style.position = 'relative';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'code-copy-btn';
+        copyBtn.textContent = 'Copy';
+        pre.appendChild(copyBtn);
+
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(codeEl.textContent);
+                copyBtn.textContent = 'Copied!';
+            } catch (err) {
+                copyBtn.textContent = 'Failed';
+            }
+            setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1600);
+        });
+    });
 });
