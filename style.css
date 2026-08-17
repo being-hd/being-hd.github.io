@@ -43,6 +43,7 @@ body {
     font-size: 15px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
@@ -101,7 +102,7 @@ img[data-piece] { max-width: none; width: auto; height: auto; display: inline-bl
 .entry-title { font-size: 14px; color: var(--text); margin: 0 0 5px; line-height: 1.55; }
 .entry-title strong { color: var(--accent-bright); font-family: var(--font-sans); font-weight: 500; }
 .entry-meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-soft); margin: 0 0 4px; }
-.entry-desc { font-size: 13px; color: var(--text-soft); margin: 6px 0 0; line-height: 1.6; }
+.entry-desc { font-size: 13px; color: var(--text-soft); margin: 6px 0 0; line-height: 1.6; text-align: justify; text-justify: inter-word; }
 
 /* ===========================================================
    Card grid — GitHub projects, certifications, memberships
@@ -614,7 +615,7 @@ strong { color: var(--accent-bright); font-weight: 600; }
 .modal-box h3 { font-family: var(--font-sans); font-size: 1.25rem; line-height: 1.4; color: var(--text); margin: 0 0 10px; }
 .modal-meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-faint); margin: 0 0 4px; }
 .modal-meta strong { color: var(--accent); font-weight: 500; }
-.modal-abstract { font-size: 13.5px; color: var(--text-soft); margin: 16px 0; line-height: 1.7; }
+.modal-abstract { font-size: 13.5px; color: var(--text-soft); margin: 16px 0; line-height: 1.7; text-align: justify; text-justify: inter-word; }
 .modal-keywords { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; }
 
 /* Puzzle modal specifics */
@@ -629,7 +630,7 @@ strong { color: var(--accent-bright); font-weight: 600; }
    Responsive
 =========================================================== */
 @media screen and (max-width: 1000px) {
-    .shell { grid-template-columns: 1fr; }
+    .shell { grid-template-columns: minmax(0, 1fr); }
     .side-col { border-left: none; border-top: 1px solid var(--line); position: static; max-height: none; }
     .about-block { flex-direction: column; align-items: center; text-align: center; }
     .about-desc { max-width: 100%; }
