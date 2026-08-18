@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Linux — II: The Filesystem Hierarchy — Notebook — Hirak Doshi</title>
+<meta name="description" content="A plain, example-driven walkthrough of the Linux filesystem hierarchy — what /etc, /var, /opt, /bin, /usr and the rest actually hold, and why.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+</head>
+<body class="no-side-mobile">
+
+<button class="header-toggle" id="headerToggle">menu</button>
+
+<header class="site-header">
+    <div class="nav-wrap" id="navWrap">
+        <ul class="main-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../research.html">Research</a></li>
+            <li><a href="../teaching.html">Teaching</a></li>
+            <li><a href="../project.html">Projects</a></li>
+            <li><a href="../notebook.html" aria-current="page">Notebook</a></li>
+        </ul>
+    </div>
+    <div class="nav-rule"></div>
+</header>
+
+<div class="shell">
+    <main class="main-col">
+
+        <section class="block" style="border-top: none; padding-top: 0;">
+            <a class="article-back" href="../notebook.html">← Back to Notebook</a>
+            <div class="article-meta">
+                <span class="post-tag">Linux</span>
+            </div>
+            <h1 class="about-name" style="font-size: clamp(1.7rem, 1.4rem + 1.6vw, 2.3rem); margin-bottom: 6px;">Learning Linux — II</h1>
+            <p class="about-titles" style="margin-bottom: 0;">The filesystem hierarchy</p>
+        </section>
+
+        <section class="block" style="border-top: none; padding-top: 0; padding-bottom: 0;">
+            <div class="article-share-row">
+                <span class="post-published">Published on August 19, 2026</span>
+                <div class="post-share">
+                    <button class="share-link copy-link-btn" type="button" data-share-url="https://being-hd.github.io/blog_posts/learning-linux-filesystem-hierarchy.html">Share →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="block article-body" style="border-top: none; padding-top: 0;">
+            <p>This blog explains what the main Linux directories are for, with a real example for each. It's a reference, not a story — read it once, then come back to it whenever you're unsure where something belongs.</p>
+
+            <p>The commands used below (<code>cat</code>, <code>ls</code>, <code>which</code>) aren't explained here. If you don't know them yet, that's fine — a separate post covers basic commands. For now, just focus on what each directory holds.</p>
+
+            <p>Everything starts from a single root: <code>/</code>. Every directory lives somewhere under it. Quick reference first, then each one explained with something real inside it.</p>
+
+            <div class="article-table-wrap">
+                <table>
+                    <tr><th>Path</th><th>What's actually there</th></tr>
+                    <tr><td><code>/bin</code>, <code>/sbin</code></td><td>Core commands (ls, cp, mount)</td></tr>
+                    <tr><td><code>/usr</code></td><td>Installed programs and their files</td></tr>
+                    <tr><td><code>/etc</code></td><td>System-wide config files</td></tr>
+                    <tr><td><code>/var</code></td><td>Logs, caches, data that changes</td></tr>
+                    <tr><td><code>/opt</code></td><td>Third-party software, self-contained</td></tr>
+                    <tr><td><code>/home</code></td><td>Your personal files</td></tr>
+                    <tr><td><code>/root</code></td><td>The root user's home</td></tr>
+                    <tr><td><code>/tmp</code></td><td>Scratch space, wiped on reboot</td></tr>
+                    <tr><td><code>/dev</code></td><td>Hardware, represented as files</td></tr>
+                    <tr><td><code>/proc</code>, <code>/sys</code></td><td>Live kernel/process info, not real files</td></tr>
+                    <tr><td><code>/mnt</code>, <code>/media</code></td><td>Where other drives get attached</td></tr>
+                    <tr><td><code>/boot</code></td><td>What the machine needs to start up</td></tr>
+                </table>
+            </div>
+
+            <h2>/bin and /sbin — the commands you use without thinking</h2>
+            <p>Every basic command lives here as an actual file. <code>/bin/ls</code> is the <code>ls</code> command. Try it:</p>
+            <pre><code>ls -l /bin/ls
+which ls</code></pre>
+            <p><code>/sbin</code> holds the same idea but for admin-only commands — things like <code>fdisk</code> or <code>reboot</code>, which normal users don't run day to day. On most modern systems <code>/bin</code> and <code>/sbin</code> are actually just symlinks into <code>/usr/bin</code> and <code>/usr/sbin</code> now — a historical split that's mostly been merged away, but the names stuck around.</p>
+
+            <h2>/usr — almost everything installed lives here</h2>
+            <p>Despite the name, this has nothing to do with "user" in the personal-files sense. It's where installed software actually lands: programs, their libraries, their documentation. When you <code>apt install</code> something, most of it ends up somewhere under <code>/usr</code>.</p>
+            <pre><code>which python3
+# usually /usr/bin/python3
+ls /usr/share/doc | head</code></pre>
+            <p><code>/usr/local</code> is the one exception worth remembering: it's for software you install yourself, outside the package manager — things you build from source. Package-manager software and your own hand-built software are kept apart on purpose, so upgrading one never clobbers the other.</p>
+
+            <h2>/etc — every config file, system-wide</h2>
+            <p>Short for "et cetera," though nobody really uses it that way anymore — it's config files, full stop. If a program has system-wide settings, they're a plain text file in here somewhere.</p>
+            <pre><code>cat /etc/hostname
+cat /etc/os-release
+ls /etc/apt/</code></pre>
+            <p>This is also where you'll end up if you ever configure networking, users, or services by hand — <code>/etc/fstab</code> for mounted drives, <code>/etc/passwd</code> for user accounts, and so on.</p>
+
+            <h2>/var — the stuff that changes constantly</h2>
+            <p>"Variable" data: logs, caches, anything that grows or changes while the system runs, as opposed to <code>/usr</code>'s mostly-static installed programs.</p>
+            <pre><code>ls /var/log
+tail /var/log/syslog</code></pre>
+            <p>If a machine is running out of disk space for no obvious reason, <code>/var/log</code> is usually the first place to check — logs that were never rotated or cleaned up can quietly eat gigabytes.</p>
+
+            <h2>/opt — software that keeps to itself</h2>
+            <p>For third-party applications that come as a single self-contained bundle rather than being broken up and scattered across <code>/usr</code> the normal package-manager way. Think commercial software, or anything installed from a vendor's own installer rather than <code>apt</code>.</p>
+            <pre><code>ls /opt</code></pre>
+            <p>If you ever install something like MATLAB or a vendor SDK by hand, this is often exactly where it wants to live — its own folder, everything it needs in one place, nothing smeared across the rest of the filesystem.</p>
+
+            <h2>/home and /root — where people actually live</h2>
+            <p><code>/home/yourname</code> is your personal space — documents, downloads, your own config files (the hidden <code>.bashrc</code>, <code>.config</code>, and so on). <code>/root</code> is the same idea but specifically for the root user, kept separate from regular <code>/home</code> so the system's most privileged account isn't mixed in with everyone else's.</p>
+            <pre><code>echo $HOME
+ls -la ~</code></pre>
+
+            <h2>/tmp — genuinely temporary</h2>
+            <p>Anything here can vanish on reboot, sometimes even sooner. Programs use it for scratch files mid-task. Never store anything here you actually want to keep.</p>
+
+            <h2>/dev, /proc, /sys — not real files at all</h2>
+            <p>These look like ordinary files and folders. They are not stored on disk. The kernel generates their content automatically, on demand.</p>
+            <pre><code>cat /proc/cpuinfo
+cat /proc/meminfo
+ls /dev</code></pre>
+            <p><code>/dev</code> represents your actual hardware as files — <code>/dev/sda</code> is a disk, <code>/dev/null</code> is a black hole that discards anything written to it. <code>/proc</code> and <code>/sys</code> are windows into the running kernel and processes — read <code>/proc/cpuinfo</code> and you're not reading a file that exists anywhere on disk, you're asking the kernel to describe your CPU right now.</p>
+
+            <h2>/mnt and /media — where other drives show up</h2>
+            <p><code>/media</code> is where removable stuff auto-mounts — USB sticks, external drives, usually under a folder named after the device or label. <code>/mnt</code> is the equivalent for things you mount by hand, temporarily, as an admin. Functionally similar; the difference is mostly about who's doing the mounting and how permanent it's meant to be.</p>
+
+            <h2>/boot — what gets the machine running at all</h2>
+            <p>The kernel image and the bootloader configuration live here — the small set of files needed before the rest of the system is even available. This is the same partition we set up as <code>/boot/efi</code> back in the partitioning post — it has to exist and be reachable before anything else on this list means anything.</p>
+
+            <p>You don't need to memorize this. Use it as a reference: if a program's config and its logs are in different folders, it's because configs and logs are never meant to hold the same kind of thing.</p>
+        </section>
+    </main>
+
+    <aside class="side-col">
+        <section class="research-block">
+            <p class="side-title">Read Along</p>
+            <p class="side-sub">Recent works from the literature, updated frequently via CrossRef.</p>
+            <div id="paperList">
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Mathematical Imaging</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Motion / Optical Flow</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Diffusion MRI</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+            </div>
+        </section>
+
+        <section class="puzzle-block">
+            <p class="side-title">Mate Break</p>
+            <p class="side-sub">Clear your head with today's Lichess puzzle — no login, no leaving the page</p>
+            <div class="puzzle-card">
+                <p class="puzzle-turn" id="puzzleTurnLabel">Loading today's puzzle…</p>
+                <button class="btn" id="openPuzzleBtn">Solve the puzzle →</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; Hirak Doshi <span id="year"></span></p>
+    <a class="footer-contact" href="mailto:hd92sssihl.psn@gmail.com" target="_blank" rel="noopener">Contact me →</a>
+    <div class="footer-socials">
+        <a href="https://twitter.com/beinghd16/" target="_blank" rel="noopener">X</a>
+        <a href="https://github.com/being-hd" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/hirak-doshi/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="paperModal">
+    <div class="modal-box">
+        <button class="modal-close" id="paperModalClose">&times;</button>
+        <span class="modal-tag" id="pmTag">Math</span>
+        <h3 id="pmTitle">—</h3>
+        <p class="modal-meta"><strong>Authors:</strong> <span id="pmAuthors">—</span></p>
+        <p class="modal-meta"><strong>Journal:</strong> <span id="pmJournal">—</span></p>
+        <p class="modal-meta"><strong>Year:</strong> <span id="pmYear">—</span></p>
+        <p class="modal-abstract" id="pmAbstract">—</p>
+        <div class="modal-keywords" id="pmKeywords"></div>
+        <a class="btn" id="pmLink" href="#" target="_blank" rel="noopener">Read on publisher site →</a>
+    </div>
+</div>
+
+<div class="modal-overlay" id="puzzleModal">
+    <div class="modal-box">
+        <button class="modal-close" id="puzzleModalClose">&times;</button>
+        <span class="modal-tag">Lichess Puzzle of the Day</span>
+        <h3 id="pzTurnLabel">—</h3>
+        <div id="puzzleBoard"></div>
+        <p class="puzzle-status" id="puzzleStatus">Make your move — drag a piece to begin.</p>
+        <div class="puzzle-actions">
+            <button class="btn btn-ghost" id="puzzleResetBtn">Reset</button>
+            <a class="btn" id="puzzleAnalyzeBtn" href="#" target="_blank" rel="noopener">Analyze on Lichess →</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>
