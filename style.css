@@ -649,7 +649,7 @@ strong { color: var(--accent-bright); font-weight: 600; }
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 8px;
     }
 
