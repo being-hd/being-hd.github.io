@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Linux — I: Manual Partitioning During Installation — Notebook — Hirak Doshi</title>
+<meta name="description" content="A practical, human walkthrough of manual disk partitioning during a Linux install — both fresh single-OS setups and dual-boot alongside Windows.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+</head>
+<body class="no-side-mobile">
+
+<button class="header-toggle" id="headerToggle">menu</button>
+
+<header class="site-header">
+    <div class="nav-wrap" id="navWrap">
+        <ul class="main-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../research.html">Research</a></li>
+            <li><a href="../teaching.html">Teaching</a></li>
+            <li><a href="../project.html">Projects</a></li>
+            <li><a href="../notebook.html" aria-current="page">Notebook</a></li>
+        </ul>
+    </div>
+    <div class="nav-rule"></div>
+</header>
+
+<div class="shell">
+    <main class="main-col">
+
+        <section class="block" style="border-top: none; padding-top: 0;">
+            <a class="article-back" href="../notebook.html">← Back to Notebook</a>
+            <div class="article-meta">
+                <span class="post-tag">Linux</span>
+            </div>
+            <h1 class="about-name" style="font-size: clamp(1.7rem, 1.4rem + 1.6vw, 2.3rem); margin-bottom: 6px;">Learning Linux — I</h1>
+            <p class="about-titles" style="margin-bottom: 0;">Manual partitioning during installation</p>
+        </section>
+
+        <section class="block" style="border-top: none; padding-top: 0; padding-bottom: 0;">
+            <div class="article-share-row">
+                <span class="post-published">Published on August 18, 2026</span>
+                <div class="post-share">
+                    <button class="share-link copy-link-btn" type="button" data-share-url="https://being-hd.github.io/blog_posts/learning-linux-manual-partitioning.html">Share →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="block article-body" style="border-top: none; padding-top: 0;">
+            <p>I helped someone install Ubuntu recently and took notes as I went, the way I usually do when I know I'll need to do the same thing again someday. Writing it up properly here, because "someday" always arrives faster than expected, and I'd rather look this up than relearn it.</p>
+
+            <p>Manual partitioning during install looks intimidating mostly because the installer doesn't tell you which situation you're in, and the right answer genuinely depends on it. A fresh machine with nothing else on it is almost boring. A machine that's already running Windows and needs to keep doing so afterward is where people actually get nervous — and where mistakes happen.</p>
+
+            <h2>Case 1: fresh install, whole disk to yourself</h2>
+            <p>If there's no other OS to protect, this is close to the easy case. Say you've got a 256 GB SSD (I'll call it <code>sdb</code> here, though the actual letter depends on the machine):</p>
+
+            <div class="article-table-wrap">
+                <table>
+                    <tr><th>#</th><th>Type</th><th>Space</th><th>Mount point</th><th>Purpose</th></tr>
+                    <tr><td>sdb1</td><td>FAT32</td><td>1 GB</td><td><code>/boot/efi</code></td><td>Boot OS</td></tr>
+                    <tr><td>sdb2</td><td>ext4</td><td>70 GB</td><td><code>/</code></td><td>Root (programs, system)</td></tr>
+                    <tr><td>sdb3</td><td>swap</td><td>8 GB</td><td>—</td><td>Swap</td></tr>
+                    <tr><td>sdb4</td><td>ext4</td><td>74 GB</td><td>—</td><td>Storage drive 1</td></tr>
+                    <tr><td>sdb5</td><td>ext4</td><td>100 GB</td><td>—</td><td>Storage drive 2</td></tr>
+                </table>
+            </div>
+
+            <p>Take those numbers as illustrative, not prescriptive — this was a 256 GB disk, and the actual split should scale with whatever you're working with. The EFI partition genuinely doesn't need more than 1 GB regardless of disk size, but root and storage should flex with total capacity. Swap is its own question: the old "swap equals RAM" rule mostly existed for hibernation support, and with modern RAM sizes it's common to see much smaller swap (or none at all) on machines that never hibernate — worth deciding based on your actual RAM and whether you need suspend-to-disk, not just copying a number.</p>
+
+            <p>One thing worth knowing about that table, not just copying it: leave the storage partitions <strong>without a mount point</strong> during install. They'll show up afterward as separate drives in Nautilus (Files) instead of being folded silently into one big filesystem — much easier to find things later.</p>
+
+            <h2>Case 2: dual-boot alongside Windows</h2>
+            <p>This is the one that actually goes wrong for people, usually in one of two specific ways.</p>
+
+            <h3>Shrink Windows from inside Windows</h3>
+            <p>Use Windows' own Disk Management to shrink the NTFS partition and free up unallocated space <em>before</em> you ever boot the Ubuntu installer. Resizing NTFS from inside the Linux installer is riskier and more likely to leave Windows in a state where it won't boot afterward.</p>
+
+            <h3>Don't touch the existing EFI partition — reuse it</h3>
+            <p>Windows already created a small EFI partition (usually FAT32, a few hundred MB) the first time it was installed. During Ubuntu's manual partitioning step, select that <em>existing</em> partition and set its mount point to <code>/boot/efi</code> — but don't reformat it. Reformatting wipes Windows' boot entries, and that's the single most common way people accidentally lose the ability to boot into Windows at all.</p>
+
+            <h3>The one that actually got me: BitLocker</h3>
+            <p>Partway through, the Ubuntu installer wouldn't let me touch the drive at all. Turned out Windows had silently encrypted it — Device Encryption, the consumer version of BitLocker, had turned itself on automatically during Windows setup, tied to the Microsoft account, without anyone explicitly choosing it. And it wasn't just the main drive; separate partitions were locked independently too, which is why I had to boot back into Windows and unlock each one individually before the installer would cooperate.</p>
+            <p>If you hit a wall partway through partitioning and can't tell why, this is worth checking first: <strong>Settings → Privacy &amp; Security → Device Encryption</strong> in Windows (or Control Panel → BitLocker Drive Encryption on Pro editions). Suspend or turn off encryption on every drive you're about to touch, not just C:.</p>
+            <p>Worth doing at the same time: turn off <strong>Fast Startup</strong> in Windows' power settings. It leaves NTFS in a half-hibernated state that Linux can't safely mount, and it's a common source of "why can't Linux see my Windows files" confusion later.</p>
+
+            <h2>After the install</h2>
+            <p>Once Ubuntu's up, it's worth a quick sanity check rather than assuming the installer did what you asked:</p>
+            <pre><code>lsblk</code></pre>
+            <p>Confirms the partition table actually matches what you intended. Then, to label the storage drives so they show up as something recognizable instead of anonymous blocks:</p>
+            <pre><code>sudo e2label /dev/sdb4 &lt;drive-name&gt;
+sudo e2label /dev/sdb5 &lt;drive-name&gt;</code></pre>
+
+            <p>None of this is complicated once you've done it once. It's just unforgiving the first time, which is exactly why it's worth writing down.</p>
+        </section>
+    </main>
+
+    <aside class="side-col">
+        <section class="research-block">
+            <p class="side-title">Read Along</p>
+            <p class="side-sub">Recent works from the literature, updated frequently via CrossRef.</p>
+            <div id="paperList">
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Mathematical Imaging</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Motion / Optical Flow</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Diffusion MRI</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+            </div>
+        </section>
+
+        <section class="puzzle-block">
+            <p class="side-title">Mate Break</p>
+            <p class="side-sub">Clear your head with today's Lichess puzzle — no login, no leaving the page</p>
+            <div class="puzzle-card">
+                <p class="puzzle-turn" id="puzzleTurnLabel">Loading today's puzzle…</p>
+                <button class="btn" id="openPuzzleBtn">Solve the puzzle →</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; Hirak Doshi <span id="year"></span></p>
+    <a class="footer-contact" href="mailto:hd92sssihl.psn@gmail.com" target="_blank" rel="noopener">Contact me →</a>
+    <div class="footer-socials">
+        <a href="https://twitter.com/beinghd16/" target="_blank" rel="noopener">X</a>
+        <a href="https://github.com/being-hd" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/hirak-doshi/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="paperModal">
+    <div class="modal-box">
+        <button class="modal-close" id="paperModalClose">&times;</button>
+        <span class="modal-tag" id="pmTag">Math</span>
+        <h3 id="pmTitle">—</h3>
+        <p class="modal-meta"><strong>Authors:</strong> <span id="pmAuthors">—</span></p>
+        <p class="modal-meta"><strong>Journal:</strong> <span id="pmJournal">—</span></p>
+        <p class="modal-meta"><strong>Year:</strong> <span id="pmYear">—</span></p>
+        <p class="modal-abstract" id="pmAbstract">—</p>
+        <div class="modal-keywords" id="pmKeywords"></div>
+        <a class="btn" id="pmLink" href="#" target="_blank" rel="noopener">Read on publisher site →</a>
+    </div>
+</div>
+
+<div class="modal-overlay" id="puzzleModal">
+    <div class="modal-box">
+        <button class="modal-close" id="puzzleModalClose">&times;</button>
+        <span class="modal-tag">Lichess Puzzle of the Day</span>
+        <h3 id="pzTurnLabel">—</h3>
+        <div id="puzzleBoard"></div>
+        <p class="puzzle-status" id="puzzleStatus">Make your move — drag a piece to begin.</p>
+        <div class="puzzle-actions">
+            <button class="btn btn-ghost" id="puzzleResetBtn">Reset</button>
+            <a class="btn" id="puzzleAnalyzeBtn" href="#" target="_blank" rel="noopener">Analyze on Lichess →</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>

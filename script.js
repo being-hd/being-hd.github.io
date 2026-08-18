@@ -334,17 +334,45 @@ document.addEventListener('DOMContentLoaded', () => {
        links, which depended on Open Graph scraping that isn't set
        up yet and left LinkedIn/X share dialogs blank)
     =========================================================== */
+    async function copyTextToClipboard(text) {
+        // Preferred path: the modern Clipboard API. Requires a secure
+        // (HTTPS) context, and some privacy-hardened mobile browsers
+        // (e.g. Brave's Shields) block it outright even when secure.
+        if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (err) {
+                // fall through to the legacy method below
+            }
+        }
+
+        // Fallback: the old execCommand('copy') trick via a hidden
+        // textarea. Deprecated, but still broadly supported and works
+        // in several places the Clipboard API is blocked.
+        try {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            const success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            return success;
+        } catch (err) {
+            return false;
+        }
+    }
+
     document.querySelectorAll('.copy-link-btn').forEach((btn) => {
         const url = btn.getAttribute('data-share-url');
         const originalLabel = btn.textContent;
         btn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(url);
-                btn.textContent = 'Copied!';
-            } catch (err) {
-                // Clipboard API unavailable (older browser, non-HTTPS, etc.)
-                btn.textContent = 'Copy failed — select manually';
-            }
+            const ok = await copyTextToClipboard(url);
+            btn.textContent = ok ? 'Copied!' : 'Copy failed — select manually';
             setTimeout(() => { btn.textContent = originalLabel; }, 1800);
         });
     });
