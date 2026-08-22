@@ -27,6 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const paperModal = wireModal('paperModal', 'paperModalClose');
     const puzzleModal = wireModal('puzzleModal', 'puzzleModalClose');
 
+    /* ---------------------------------------------------------
+       Photo zoom — click (or Enter/Space) the portrait to enlarge
+    --------------------------------------------------------- */
+    const photoTrigger = document.getElementById('portraitTrigger');
+    if (photoTrigger && document.getElementById('photoModal')) {
+        const photoModal = wireModal('photoModal', 'photoModalClose');
+        photoTrigger.addEventListener('click', () => photoModal.open());
+        photoTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                photoModal.open();
+            }
+        });
+    }
+
     /* ===========================================================
        LATEST RESEARCH
        Three fixed categories, rotated deterministically by date
@@ -382,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
        Auto-injected for every <pre><code> in .article-body, so
        future posts get this for free without extra markup.
     =========================================================== */
-    document.querySelectorAll('.article-body pre').forEach((pre) => {
+    document.querySelectorAll('.article-body pre:not(.output)').forEach((pre) => {
         const codeEl = pre.querySelector('code');
         if (!codeEl) return;
 

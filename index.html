@@ -33,7 +33,7 @@
     <main class="main-col">
 
         <section class="block about-block">
-            <div class="portrait">
+            <div class="portrait" id="portraitTrigger" role="button" tabindex="0" aria-label="View larger photo">
                 <img src="/images/profile.JPG" alt="Portrait of Hirak Doshi">
             </div>
             <div>
@@ -170,6 +170,14 @@
         <a href="https://linkedin.com/in/hirak-doshi/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
 </footer>
+
+<!-- ============== PHOTO ZOOM MODAL ============== -->
+<div class="modal-overlay" id="photoModal">
+    <div class="modal-box photo-modal-box">
+        <button class="modal-close" id="photoModalClose">&times;</button>
+        <img src="/images/profile.JPG" alt="Portrait of Hirak Doshi, enlarged" class="photo-modal-img">
+    </div>
+</div>
 
 <!-- ============== PAPER MODAL ============== -->
 <div class="modal-overlay" id="paperModal">
