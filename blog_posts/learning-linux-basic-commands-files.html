@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Linux — III: Basic Commands, Files &amp; Navigation — Notebook — Hirak Doshi</title>
+<meta name="description" content="15 essential Linux commands for navigating and working with files — pwd, ls, cd, mkdir, cp, mv, cat, head, tail, find, and more — with real examples.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+</head>
+<body class="no-side-mobile">
+
+<button class="header-toggle" id="headerToggle">menu</button>
+
+<header class="site-header">
+    <div class="nav-wrap" id="navWrap">
+        <ul class="main-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../research.html">Research</a></li>
+            <li><a href="../teaching.html">Teaching</a></li>
+            <li><a href="../project.html">Projects</a></li>
+            <li><a href="../notebook.html" aria-current="page">Notebook</a></li>
+        </ul>
+    </div>
+    <div class="nav-rule"></div>
+</header>
+
+<div class="shell">
+    <main class="main-col">
+
+        <section class="block" style="border-top: none; padding-top: 0;">
+            <a class="article-back" href="../notebook.html">← Back to Notebook</a>
+            <div class="article-meta">
+                <span class="post-tag">Linux</span>
+            </div>
+            <h1 class="about-name" style="font-size: clamp(1.7rem, 1.4rem + 1.6vw, 2.3rem); margin-bottom: 6px;">Learning Linux — III</h1>
+            <p class="about-titles" style="margin-bottom: 0;">Basic commands: files &amp; navigation</p>
+        </section>
+
+        <section class="block" style="border-top: none; padding-top: 0; padding-bottom: 0;">
+            <div class="article-share-row">
+                <span class="post-published">Published on August 19, 2026</span>
+                <div class="post-share">
+                    <button class="share-link copy-link-btn" type="button" data-share-url="https://being-hd.github.io/blog_posts/learning-linux-basic-commands-files.html">Share →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="block article-body" style="border-top: none; padding-top: 0;">
+            <p>This blog covers 15 commands for moving around and working with files — the ones you'll type more than any others.</p>
+
+            <h2>pwd — where am I</h2>
+            <p>Prints the full path of the folder you're currently in.</p>
+            <pre><code>pwd</code></pre>
+            <pre class="output"><code>/home/user</code></pre>
+
+            <h2>ls — list what's in a folder</h2>
+            <p>Plain <code>ls</code> just names things. Add flags for more detail.</p>
+            <pre><code>ls</code></pre>
+            <pre class="output"><code>Documents  Downloads  Music  Pictures  Videos  Templates  Public  projects</code></pre>
+
+            <p><code>-l</code> gives a long listing: permissions, owner, size, date.</p>
+            <pre><code>ls -l</code></pre>
+            <pre class="output"><code>drwxr-xr-x  4 user user 4096 Aug 21 21:44 Desktop
+drwxr-xr-x  4 user user 4096 Jul 13 23:27 Documents
+drwxr-xr-x  2 user user 4096 Aug 18 23:01 Downloads
+drwxr-xr-x  2 user user 4096 Sep 28  2025 Music
+drwxr-xr-x  2 user user 4096 Aug 14 01:10 Pictures</code></pre>
+
+            <p><code>-a</code> adds hidden files — anything starting with a dot, like config files — which plain <code>ls</code> skips.</p>
+            <pre><code>ls -la</code></pre>
+            <pre class="output"><code>drwxr-x--- 12 user user 4096 Aug 16 01:29 .
+drwxr-xr-x  3 root root 4096 Sep 28  2025 ..
+-rw-------  1 user user 20773 Aug 21 21:45 .bash_history
+-rw-r--r--  1 user user   220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 user user  4092 Aug 15 01:59 .bashrc
+drwx------  2 user user  4096 Oct  2 2025 .ssh
+drwxr-xr-x  4 user user  4096 Aug 21 21:44 Desktop
+drwxr-xr-x  4 user user  4096 Jul 13 23:27 Documents</code></pre>
+            <p>The first two entries, <code>.</code> and <code>..</code>, always show up — they mean "this folder" and "the folder above it."</p>
+
+            <h2>mkdir — make a folder</h2>
+            <pre><code>mkdir ~/test_dir</code></pre>
+            <p>Creates <code>test_dir</code> inside your home folder. No output means it worked.</p>
+
+            <h2>cd — move into a folder</h2>
+            <pre><code>cd ~/test_dir
+pwd</code></pre>
+            <pre class="output"><code>/home/user/test_dir</code></pre>
+            <p><code>~</code> always means your home folder, so <code>cd ~</code> takes you home from anywhere. <code>cd ..</code> moves up one level.</p>
+
+            <h2>touch — create an empty file</h2>
+            <pre><code>touch sample.txt
+ls</code></pre>
+            <pre class="output"><code>sample.txt</code></pre>
+            <p>If the file already exists, <code>touch</code> just updates its timestamp instead of erasing it — worth knowing so it doesn't surprise you later.</p>
+
+            <h2>cat — print a file's contents</h2>
+            <pre><code>echo "Hello from Linux" > sample.txt
+cat sample.txt</code></pre>
+            <pre class="output"><code>Hello from Linux</code></pre>
+            <p>The <code>echo "..." &gt;</code> part isn't <code>cat</code> — it's writing a line into the file first, so <code>cat</code> has something to show.</p>
+
+            <h2>head — first lines of a file</h2>
+            <pre><code>seq 1 20 > numbers.txt
+head numbers.txt</code></pre>
+            <pre class="output"><code>1
+2
+3
+4
+5
+6
+7
+8
+9
+10</code></pre>
+            <p>Default is 10 lines. Ask for a specific number with <code>-n</code>:</p>
+            <pre><code>head -n 3 numbers.txt</code></pre>
+            <pre class="output"><code>1
+2
+3</code></pre>
+
+            <h2>tail — last lines of a file</h2>
+            <pre><code>tail numbers.txt</code></pre>
+            <pre class="output"><code>11
+12
+13
+14
+15
+16
+17
+18
+19
+20</code></pre>
+            <p>Same <code>-n</code> flag works here too:</p>
+            <pre><code>tail -n 3 numbers.txt</code></pre>
+            <pre class="output"><code>18
+19
+20</code></pre>
+            <p><code>tail</code> is the one you'll reach for most in practice — checking the end of a log file to see what just happened, without printing the whole thing.</p>
+
+            <h2>cp — copy a file</h2>
+            <pre><code>cp sample.txt sample_copy.txt
+ls</code></pre>
+            <pre class="output"><code>numbers.txt  sample_copy.txt  sample.txt</code></pre>
+
+            <h2>mv — move or rename a file</h2>
+            <p><code>mv</code> does both jobs — moving a file and renaming it are the same operation to Linux, just with a different destination.</p>
+            <pre><code>mv sample_copy.txt renamed.txt
+ls</code></pre>
+            <pre class="output"><code>numbers.txt  renamed.txt  sample.txt</code></pre>
+
+            <h2>find — search for files</h2>
+            <pre><code>find . -name "*.txt"</code></pre>
+            <pre class="output"><code>./numbers.txt
+./sample.txt
+./renamed.txt</code></pre>
+            <p><code>.</code> means "start searching from here." <code>-name "*.txt"</code> matches anything ending in <code>.txt</code>.</p>
+
+            <h2>file — check what type a file actually is</h2>
+            <pre><code>file sample.txt</code></pre>
+            <pre class="output"><code>sample.txt: ASCII text</code></pre>
+            <p>Useful when a file has no extension, or you don't trust the extension it has — <code>file</code> looks at the actual content, not the name.</p>
+
+            <h2>less — view a file one screen at a time</h2>
+            <pre><code>less numbers.txt</code></pre>
+            <p>Opens the file in a scrollable view instead of dumping everything at once like <code>cat</code>. Arrow keys or space to scroll, <code>q</code> to quit. Better than <code>cat</code> for anything longer than a screen.</p>
+
+            <h2>rm — delete a file</h2>
+            <pre><code>rm renamed.txt
+ls</code></pre>
+            <pre class="output"><code>numbers.txt  sample.txt</code></pre>
+            <p><code>rm</code> deletes immediately — there's no trash bin, no confirmation, no undo. To delete a folder and everything in it, add <code>-r</code> (recursive):</p>
+            <pre><code>rm -r ~/test_dir</code></pre>
+            <p>Type the path carefully before hitting enter. This is the one command on this list worth double-checking every single time.</p>
+
+            <h2>man — read a command's manual</h2>
+            <pre><code>man ls</code></pre>
+            <pre class="output"><code>LS(1)                     User Commands                     LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List information about the FILEs (the current directory
+       by default). Sort entries alphabetically if none of
+       -cftuvSUX nor --sort is specified.</code></pre>
+            <p>Every command that ships with Linux has a manual page like this, describing what it does and every flag it accepts.</p>
+
+        </section>
+    </main>
+
+    <aside class="side-col">
+        <section class="research-block">
+            <p class="side-title">Read Along</p>
+            <p class="side-sub">Recent works from the literature, updated frequently via CrossRef.</p>
+            <div id="paperList">
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Mathematical Imaging</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Motion / Optical Flow</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+                <div class="paper-card paper-skeleton"><span class="paper-tag">Diffusion MRI</span><p class="paper-title">Loading…</p><p class="paper-meta">&nbsp;</p></div>
+            </div>
+        </section>
+
+        <section class="puzzle-block">
+            <p class="side-title">Mate Break</p>
+            <p class="side-sub">Clear your head with today's Lichess puzzle — no login, no leaving the page</p>
+            <div class="puzzle-card">
+                <p class="puzzle-turn" id="puzzleTurnLabel">Loading today's puzzle…</p>
+                <button class="btn" id="openPuzzleBtn">Solve the puzzle →</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; Hirak Doshi <span id="year"></span></p>
+    <a class="footer-contact" href="mailto:hd92sssihl.psn@gmail.com" target="_blank" rel="noopener">Contact me →</a>
+    <div class="footer-socials">
+        <a href="https://twitter.com/beinghd16/" target="_blank" rel="noopener">X</a>
+        <a href="https://github.com/being-hd" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/hirak-doshi/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="paperModal">
+    <div class="modal-box">
+        <button class="modal-close" id="paperModalClose">&times;</button>
+        <span class="modal-tag" id="pmTag">Math</span>
+        <h3 id="pmTitle">—</h3>
+        <p class="modal-meta"><strong>Authors:</strong> <span id="pmAuthors">—</span></p>
+        <p class="modal-meta"><strong>Journal:</strong> <span id="pmJournal">—</span></p>
+        <p class="modal-meta"><strong>Year:</strong> <span id="pmYear">—</span></p>
+        <p class="modal-abstract" id="pmAbstract">—</p>
+        <div class="modal-keywords" id="pmKeywords"></div>
+        <a class="btn" id="pmLink" href="#" target="_blank" rel="noopener">Read on publisher site →</a>
+    </div>
+</div>
+
+<div class="modal-overlay" id="puzzleModal">
+    <div class="modal-box">
+        <button class="modal-close" id="puzzleModalClose">&times;</button>
+        <span class="modal-tag">Lichess Puzzle of the Day</span>
+        <h3 id="pzTurnLabel">—</h3>
+        <div id="puzzleBoard"></div>
+        <p class="puzzle-status" id="puzzleStatus">Make your move — drag a piece to begin.</p>
+        <div class="puzzle-actions">
+            <button class="btn btn-ghost" id="puzzleResetBtn">Reset</button>
+            <a class="btn" id="puzzleAnalyzeBtn" href="#" target="_blank" rel="noopener">Analyze on Lichess →</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>
